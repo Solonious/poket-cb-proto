@@ -15,7 +15,7 @@
 }
 
 h2 {
-  font-size: large;
+  font-size: 1.7rem;
   font-family: Glamour, sans-serif;
 }
 
@@ -27,7 +27,7 @@ h2 {
 
 @font-face {
   font-family: Glamour;
-  src: url(../fonts/glamourgirl.ttf);
+  src: url(../fonts/CraftyGirls.ttf);
   /*font-family: Jenifer;*/
   /*src: url(../fonts/jenniferbold.ttf);*/
 }

@@ -1,49 +1,68 @@
 import React from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import {GridList } from 'material-ui/GridList';
+import { Link } from 'react-router';
+// import CustomIconButton from './CustomIconButton';
+// import IconButton from 'material-ui/IconButton';
+// import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+// import CustomIcon from './CustomIcon';
+import * as svgIcon from '../img/index';
 
 const styles = {
 	root: {
 		display: 'flex',
 		flexWrap: 'wrap',
 		justifyContent: 'space-around',
+		fontFamily: 'Glamour',
 	},
 	gridList: {
-		width: 500,
+		width: 400,
 		height: 450,
 		overflowY: 'auto',
+	},
+	btn: {
+		border: 'none',
+		background: 'transparent',
+		cursor: 'pointer'
+	},
+	img: {
+		width: '50%'
 	},
 };
 
 const tilesData = [
 	{
-		img: 'http://shirleybandb-bournemouth.com/wp-content/uploads/2016/06/breakfast-icon4.jpg',
+		id: 0,
+		img: svgIcon.salad,
 		title: 'Breakfast',
 		author: 'jill111',
 	},
 	{
-		img: 'http://images.bigoven.com/image/upload/t_recipe-256/cheesy-hash-brown-skillet-dinner.jpg',
+		id: 1,
+		img: svgIcon.tempura,
 		title: 'Dinner',
 		author: 'pashminu',
 	},
 	{
-		img: 'https://is4-ssl.mzstatic.com/image/thumb/Purple122/v4/96/3d/43/963d43de-0af1-1438-3438-f92a88833c65/source/256x256bb.jpg',
+		id: 2,
+		img: svgIcon.porridge,
 		title: 'Dessert',
 		author: 'Danson67',
 	},
 	{
-		img: 'http://lepeshka-cafe.ru/media/upload/c4bd6cdf-1baa-4590-8c23-e36623f03283.png',
+		id: 3,
+		img: svgIcon.hotDrink,
 		title: 'lunch',
 		author: 'fancycrave1',
 	},
 	{
-		img: 'http://images.bigoven.com/image/upload/t_recipe-256/main-chilis-peppercorn-burger.jpg',
+		id: 4,
+		img: svgIcon.spaguetti,
 		title: 'Burgers',
 		author: 'Hans',
 	},
 	{
-		img: 'http://i2.wp.com/eatosi.com/wp-content/uploads/2016/10/Cocktail-Week-1.png?resize=256%2C256',
+		id: 5,
+		img: svgIcon.food,
 		title: 'Drinks',
 		author: 'fancycravel',
 	},
@@ -52,18 +71,14 @@ const tilesData = [
 const Home = () => (
 	<div style={styles.root}>
 		<GridList
-			cellHeight={180}
+			cellHeight={100}
 			style={styles.gridList}
 		>
 			{tilesData.map((tile) => (
-				<GridTile
-					key={tile.img}
-					title={tile.title}
-					subtitle={<span>by <b>{tile.author}</b></span>}
-					actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-				>
-					<img src={tile.img} alt=""/>
-				</GridTile>
+					<Link to="/category" className="btn-home" style={styles.btn} key={tile.id}>
+						<img src={tile.img} style={styles.img} alt=""/>
+						<h3 style={styles.root}>{tile.title}</h3>
+					</Link>
 			))}
 		</GridList>
 	</div>
