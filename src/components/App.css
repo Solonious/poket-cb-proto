@@ -1,0 +1,33 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-book-scale infinite 2s linear;
+  height: 40px;
+}
+
+.App-header {
+  background-color: #fff;
+  height: 100px;
+  padding: 20px;
+  color: #000;
+}
+
+h2 {
+  font-size: large;
+  font-family: Glamour, sans-serif;
+}
+
+@keyframes App-book-scale {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@font-face {
+  font-family: Glamour;
+  src: url(../fonts/glamourgirl.ttf);
+  /*font-family: Jenifer;*/
+  /*src: url(../fonts/jenniferbold.ttf);*/
+}
