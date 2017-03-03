@@ -1,10 +1,6 @@
 import React from 'react';
 import {GridList } from 'material-ui/GridList';
 import { Link } from 'react-router';
-// import CustomIconButton from './CustomIconButton';
-// import IconButton from 'material-ui/IconButton';
-// import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-// import CustomIcon from './CustomIcon';
 import * as svgIcon from '../img/index';
 
 const styles = {

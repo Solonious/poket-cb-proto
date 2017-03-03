@@ -1,95 +1,80 @@
 import React from 'react';
-// import {GridList, GridTile} from 'material-ui/GridList';
-// import IconButton from 'material-ui/IconButton';
-// import Subheader from 'material-ui/Subheader';
-// import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-//
-// const styles = {
-//     root: {
-//         display: 'flex',
-//         flexWrap: 'wrap',
-//         justifyContent: 'space-around',
-//     },
-//     gridList: {
-//         width: 500,
-//         height: 450,
-//         overflowY: 'auto',
-//     },
-// };
-//
-// const tilesData = [
-//     {
-//         img: 'images/grid-list/00-52-29-429_640.jpg',
-//         title: 'Breakfast',
-//         author: 'jill111',
-//     },
-//     {
-//         img: 'images/grid-list/burger-827309_640.jpg',
-//         title: 'Tasty burger',
-//         author: 'pashminu',
-//     },
-//     {
-//         img: 'images/grid-list/camera-813814_640.jpg',
-//         title: 'Camera',
-//         author: 'Danson67',
-//     },
-//     {
-//         img: 'images/grid-list/morning-819362_640.jpg',
-//         title: 'Morning',
-//         author: 'fancycrave1',
-//     },
-//     {
-//         img: 'images/grid-list/hats-829509_640.jpg',
-//         title: 'Hats',
-//         author: 'Hans',
-//     },
-//     {
-//         img: 'images/grid-list/honey-823614_640.jpg',
-//         title: 'Honey',
-//         author: 'fancycravel',
-//     },
-//     {
-//         img: 'images/grid-list/vegetables-790022_640.jpg',
-//         title: 'Vegetables',
-//         author: 'jill111',
-//     },
-//     {
-//         img: 'images/grid-list/water-plant-821293_640.jpg',
-//         title: 'Water plant',
-//         author: 'BkrmadtyaKarki',
-//     },
-// ];
-//
-// /**
-//  * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
-//  */
-// const Category = () => {
-//      return (
-//          <div style={styles.root}>
-//              <GridList
-//                  cellHeight={180}
-//                  style={styles.gridList}
-//              >
-//                  <Subheader>December</Subheader>
-//                  {tilesData.map((tile) => (
-//                      <GridTile
-//                          key={tile.img}
-//                          title={tile.title}
-//                          subtitle={<span>by <b>{tile.author}</b></span>}
-//                          actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-//                      >
-//                          <img src={tile.img} alt=""/>
-//                      </GridTile>
-//                  ))}
-//              </GridList>
-//          </div>
-//      );
-//  };
+import {GridList, GridTile} from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
-const Category = () => (
-    <div>
-        <h1>Hello world</h1>
-    </div>
-);
+import { Link } from 'react-router';
+
+const styles = {
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+    },
+    gridList: {
+        width: 400,
+        height: 450,
+        overflowY: 'auto',
+    },
+};
+
+const tilesData = [
+    {
+        img: 'https://static.wixstatic.com/media/4947de_401c94663a794832aef3063f37bd175c~mv2_d_2048_2048_s_2.jpg_256',
+        title: 'Breakfast',
+    },
+    {
+        img: 'https://bigoven-res.cloudinary.com/image/upload/t_recipe-256/roasted-turkey-breast-efe0bf.jpg',
+        title: 'Tasty burger',
+    },
+    {
+        img: 'https://bigoven-res.cloudinary.com/image/upload/t_recipe-256/thanksgiving-turkey-2.jpg',
+        title: 'Camera',
+    },
+    {
+        img: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTb1I8aIyj-SVbn2d4KV3OWAHaLdOYRv_RhabPKd4vDTYRIqyLokw',
+        title: 'Morning',
+    },
+    {
+        img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRIVseBXY-9MdMyzoxEOXTSjDu0syZ3HzeJT4lrvZU4BNpEcjk_lQ',
+        title: 'Hats',
+    },
+    {
+        img: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRie_QDrRzRdIU80KX4yRjcVRt-KznOXp2sAMHLeKlDZyN0f_anww',
+        title: 'Honey',
+    },
+    {
+        img: 'http://i8tonite.com/wp-content/uploads/2015/07/passport-magazine-world-eats-palm-springs-tropicale-and-the-copa-room-256x256.jpg',
+        title: 'Vegetables',
+    },
+    {
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWoYsPWR8HuH2PMPYVvDBet8JWowrzbiXYSDJDr_vX1OMgo8E4',
+        title: 'Water plant',
+    },
+];
+
+/**
+ * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
+ */
+const Category = () => {
+     return (
+         <div style={styles.root}>
+             <GridList
+                 cellHeight={180}
+                 style={styles.gridList}
+             >
+                 {tilesData.map((tile) => (
+                     <GridTile
+                         key={tile.img}
+                         title={tile.title}
+                         actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+                     >
+                         <Link to="/category/:dishId"><img src={tile.img} alt=""/></Link>
+                     </GridTile>
+                 ))}
+             </GridList>
+         </div>
+     );
+ };
 
 export default Category;
