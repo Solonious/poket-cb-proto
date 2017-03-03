@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Footer from './Footer';
 
+import { Link } from 'react-router';
+
 import cooking from '../img/cooking.svg';
 import './App.css';
-
-import Home from './Home';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -18,18 +18,18 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={cooking} className="App-logo" alt="logo" />
-          <h2>Poket  COOKBOOK</h2>
+          <Link to="/"><h2>Poket  COOKBOOK</h2></Link>
         </div>
-        <Home />
+        {this.props.data.children}
         <Footer/>
       </div>
     );
   }
 }
 
-const Main = () => (
+const Main = (props) => (
     <MuiThemeProvider>
-        <App />
+        <App data={props}/>
     </MuiThemeProvider>
 );
 
