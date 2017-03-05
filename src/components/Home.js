@@ -1,7 +1,8 @@
 import React from 'react';
-import {GridList } from 'material-ui/GridList';
+import { GridList } from 'material-ui/GridList';
 import { Link } from 'react-router';
-import * as svgIcon from '../img/index';
+
+import { categoryFetchData } from '../helpers/helpers';
 
 const styles = {
 	root: {
@@ -25,59 +26,34 @@ const styles = {
 	},
 };
 
-const tilesData = [
-	{
-		id: 0,
-		img: svgIcon.salad,
-		title: 'Breakfast',
-		author: 'jill111',
-	},
-	{
-		id: 1,
-		img: svgIcon.tempura,
-		title: 'Dinner',
-		author: 'pashminu',
-	},
-	{
-		id: 2,
-		img: svgIcon.porridge,
-		title: 'Dessert',
-		author: 'Danson67',
-	},
-	{
-		id: 3,
-		img: svgIcon.hotDrink,
-		title: 'lunch',
-		author: 'fancycrave1',
-	},
-	{
-		id: 4,
-		img: svgIcon.spaguetti,
-		title: 'Burgers',
-		author: 'Hans',
-	},
-	{
-		id: 5,
-		img: svgIcon.food,
-		title: 'Drinks',
-		author: 'fancycravel',
-	},
-];
+class Home extends React.Component {
+	constructor() {
+		super();
+		this.state = {data:[]}
+	}
+	componentDidMount() {
+		categoryFetchData().then(data => {
+			this.setState({data: data});
+		});
+	}
 
-const Home = () => (
-	<div style={styles.root}>
-		<GridList
-			cellHeight={100}
-			style={styles.gridList}
-		>
-			{tilesData.map((tile) => (
-					<Link to="/category" className="btn-home" style={styles.btn} key={tile.id}>
-						<img src={tile.img} style={styles.img} alt=""/>
-						<h3 style={styles.root}>{tile.title}</h3>
-					</Link>
-			))}
-		</GridList>
-	</div>
-);
+	render() {
+		return (
+			<div style={styles.root}>
+				<GridList
+					cellHeight={100}
+					style={styles.gridList}
+				>
+					 {this.state.data.map((tile) => (
+						<Link to="/category" className="btn-home" style={styles.btn} key={tile.id}>
+							<img src={tile.src} style={styles.img} alt=""/>
+							<h3 style={styles.root}>{tile.name}</h3>
+						</Link>
+					))}
+				</GridList>
+			</div>
+		);
+	}
+}
 
 export default Home;
