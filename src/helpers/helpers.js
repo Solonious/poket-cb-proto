@@ -2,7 +2,7 @@ const YEAR = function getYear() {
     return new Date().getFullYear();
 }();
 
-const categoryFetchData = () => {
+const categoryFetchData = (url) => {
   const dataUrl = 'http://localhost:8080/category';
 
   return fetch(dataUrl)

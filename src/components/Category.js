@@ -31,11 +31,12 @@ export default class Category extends React.Component {
 
 	componentDidMount() {
 		dishFetchData().then(data => {
-			console.log('data', data);
 			this.setState({data: data});
 		});
 	}
 	render() {
+  	const { categoryId } = this.props.params;
+  	console.log(this.props.params);
 		return (
       <div style={styles.root}>
         <GridList
@@ -43,13 +44,18 @@ export default class Category extends React.Component {
           style={styles.gridList}
         >
 					{this.state.data.map((tile) => (
+						<Link
+							to={`/${categoryId}/${tile.id}`}
+						  key={tile.id}
+						>
             <GridTile
               key={tile.id}
               title={tile.dishName}
               actionIcon={<IconButton><StarBorder color="white"/></IconButton>}
             >
-              <Link to="/category/:dishId"><img src={tile.srcImage} alt=""/></Link>
+	              <img src={tile.srcImage} alt=""/>
             </GridTile>
+						</Link>
 					))}
         </GridList>
       </div>

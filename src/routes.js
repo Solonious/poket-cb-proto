@@ -6,11 +6,12 @@ import { Main, Category, Home, SingleDish } from './components';
 const routes = (
     <Router history={hashHistory}>
         <Route path="/" component={Main} >
-            <IndexRoute component={Home} />
-          <Route path="/category">
-            <IndexRoute component={Category}/>
-            <Route path="/category/:dishId" component={SingleDish}></Route>
-          </Route>
+          <IndexRoute component={Home} />
+	        <Route path="/:categoryId" component={Category}>
+		        <IndexRoute component={Category}/>
+		        <Route path="/:categoryId/:dishId" component={SingleDish}>
+		        </Route>
+	        </Route>
         </Route>
     </Router>
 );

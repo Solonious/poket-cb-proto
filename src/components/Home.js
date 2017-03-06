@@ -29,11 +29,15 @@ const styles = {
 class Home extends React.Component {
 	constructor() {
 		super();
-		this.state = {data:[]}
+		this.state = {
+			data:[],
+		}
 	}
 	componentDidMount() {
 		categoryFetchData().then(data => {
-			this.setState({data: data});
+			this.setState({
+				data,
+			});
 		});
 	}
 
@@ -45,7 +49,12 @@ class Home extends React.Component {
 					style={styles.gridList}
 				>
 					 {this.state.data.map((tile) => (
-						<Link to="/category" className="btn-home" style={styles.btn} key={tile.id}>
+						<Link
+							to={`/${tile.name}`}
+							className="btn-home"
+							style={styles.btn}
+							key={tile.id}
+						>
 							<img src={tile.src} style={styles.img} alt=""/>
 							<h3 style={styles.root}>{tile.name}</h3>
 						</Link>
