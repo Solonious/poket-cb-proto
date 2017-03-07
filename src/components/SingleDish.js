@@ -3,6 +3,8 @@ import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Car
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router';
 
+import { dishFetchData } from '../libs/helpers';
+
 const styles = {
 	card: {
 		width: '100%',
@@ -14,26 +16,35 @@ const styles = {
 };
 
 class SingleDish extends React.Component {
+	constructor() {
+		super();
+		this.state = {data: []};
+	}
+
+	componentDidMount() {
+		const { categoryId, dishId } = this.props.params;
+		const url = `http://localhost:8080/${categoryId}/${dishId}`;
+		dishFetchData(url).then(data => {
+			this.setState({data: data});
+		});
+	}
 	render() {
-		console.log(this.props);
+		const { category, dishName, description, srcImage } = this.state.data;
+		const { categoryId } = this.props.params;
 		return (
 			<Card style={styles.card}>
 				<CardMedia
-					overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle"/>}
+					overlay={
+						<CardTitle title={dishName} subtitle={category}/>}
 				>
 					<img
-						src="https://static.wixstatic.com/media/4947de_401c94663a794832aef3063f37bd175c~mv2_d_2048_2048_s_2.jpg_256"
+						src={srcImage}
 						alt=""/>
 				</CardMedia>
-				<CardTitle title="Card title" subtitle="Card subtitle"/>
-				<CardText>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-					Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-					Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-				</CardText>
+				<CardTitle title={dishName} subtitle={category}/>
+				<CardText>{description}</CardText>
 				<CardActions>
-					<Link to="/category">
+					<Link to={`/${categoryId}`}>
 						<FlatButton label="Return"/>
 					</Link>
 

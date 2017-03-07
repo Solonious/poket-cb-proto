@@ -5,7 +5,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 import { Link } from 'react-router';
 
-import { dishFetchData } from '../helpers/helpers';
+import { dishesFetchData } from '../libs/helpers';
 
 const styles = {
     root: {
@@ -30,13 +30,13 @@ export default class Category extends React.Component {
   }
 
 	componentDidMount() {
-		dishFetchData().then(data => {
+		const url = 'http://localhost:8080/category/dishes';
+		dishesFetchData(url).then(data => {
 			this.setState({data: data});
 		});
 	}
 	render() {
   	const { categoryId } = this.props.params;
-  	console.log(this.props.params);
 		return (
       <div style={styles.root}>
         <GridList

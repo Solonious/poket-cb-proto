@@ -3,10 +3,8 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 
-// import dish from './app/models/dish';
-// import { getDishes, getDish, postDish, deleteDish, updateDish } from './app/routes/dishes';
-import { getCategory, postCategory, deleteCategory, deleteAllCategory, postAllCategory } from './app/routes/category';
-import { getDishes, postDish } from './app/routes/dishes';
+import { getCategory, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
+import { getDishes, postDish, getDish } from './app/routes/dishes';
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -26,10 +24,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-// app.use((req, res, next) => {
-// 	res.send(req.param);
-// });
-
 app.use(express.static(__dirname + '/build'));
 
 app.use((req, res, next) => {
@@ -39,21 +33,22 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.route('/category').get(getCategory);
-
 app.route('/category')
+	.get(getCategory)
 	.post(postCategory)
-	.delete(deleteAllCategory)
+	.delete(deleteAllCategory);
 
 app.route('/category/:id')
-	.delete(deleteCategory)
+	.delete(deleteCategory);
 
 app.route('/category/dishes')
 	.get(getDishes);
 
 app.route('/category/dish')
 	.post(postDish);
-// app.route('/post').get(postAllCategory);
+
+app.route('/:categoryId/:dishId')
+	.get(getDish);
 
 // 	.get(getGames)
 //

@@ -9,6 +9,17 @@ const getDishes = (req, res) => {
 	});
 };
 
+const getDish = (req, res) => {
+	const { dishId } = req.params;
+	Dish.findById(dishId, (err, dish) => {
+		if(err) {
+			res.send(err);
+		}
+		res.json(dish);
+	});
+
+};
+
 // const getGame = (req, res) => {
 // 	const { id } = req.params;
 //
@@ -58,6 +69,7 @@ const deleteAllDishes = (req, res) => {
 
 export {
 	getDishes,
+	getDish,
 	postDish,
 	// deleteCategory,
 	deleteAllDishes

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './Footer.css';
-import { YEAR } from '../helpers/helpers';
+import { YEAR } from '../libs/helpers';
 
 class Footer extends Component {
 

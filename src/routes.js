@@ -7,11 +7,8 @@ const routes = (
     <Router history={hashHistory}>
         <Route path="/" component={Main} >
           <IndexRoute component={Home} />
-	        <Route path="/:categoryId" component={Category}>
-		        <IndexRoute component={Category}/>
-		        <Route path="/:categoryId/:dishId" component={SingleDish}>
-		        </Route>
-	        </Route>
+	        <Route path="/:categoryId" component={Category}/>
+	        <Route path="/:categoryId/:dishId" component={SingleDish}/>
         </Route>
     </Router>
 );
