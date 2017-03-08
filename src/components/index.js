@@ -4,6 +4,20 @@ import Home from './Home';
 import Category from './Category';
 import Footer from './Footer';
 import SingleDish from './SingleDish';
-import Photo from './Photo';
+import AdminList from './AdminList'
+import AdminCategory from './AdminCategory';
+import AdminDishes from './AdminDishes';
+import IconBtnGroup from './IconBtnGroup';
 
-export { App, Main, Home, Category, Footer, SingleDish, Photo };
+export {
+	App,
+	Main,
+	Home,
+	Category,
+	Footer,
+	SingleDish,
+	AdminList,
+	AdminDishes,
+	AdminCategory,
+	IconBtnGroup
+};

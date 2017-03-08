@@ -12,7 +12,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={cooking} className="App-logo" alt="logo" />
+          <Link to="admin"><img src={cooking} className="App-logo" alt="logo" /></Link>
           <Link to="/"><h2>Poket  COOKBOOK</h2></Link>
         </div>
         {this.props.data.children}
