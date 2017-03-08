@@ -2,6 +2,7 @@ import React from 'react';
 import {List, ListItem} from 'material-ui/List';
 import { rightIconMenu } from './IconBtnGroup';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import { Link } from 'react-router';
 
@@ -10,13 +11,18 @@ import { categoryFetchData } from '../libs/helpers';
 
 
 const styles = {
-	root: {
-		fontFamily: 'Glamour',
-	},
 	list: {
 		width: 400,
 		height: 400,
 		margin: '0 auto'
+	},
+	card: {
+		fontFamily: 'Glamour',
+		width: '100%',
+		maxWidth: 400,
+		height: 450,
+		overflowY: 'auto',
+		margin: '0 auto',
 	},
 };
 
@@ -37,14 +43,14 @@ class AdminCategory extends React.Component{
 	render() {
 		return (
 			<div>
-				<div style={styles.root}>
+				<Card style={styles.card}>
 					<Link to="admin"><h3>Adminka</h3></Link>
 					<List style={styles.list}>
 						{this.state.data.map((data) => (
 							<ListItem key={data.id} primaryText={`${data.name}`} rightIconButton={rightIconMenu}/>
 						))}
 					</List>
-				</div>
+				</Card>
 				<RaisedButton label="Add" secondary={true} style={styles.btn} />
 			</div>
 

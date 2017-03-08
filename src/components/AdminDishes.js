@@ -6,16 +6,17 @@ import { rightIconMenu } from './IconBtnGroup';
 import { Link } from 'react-router';
 
 import { dishFetchData } from '../libs/helpers';
+import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 
 const styles = {
-	root: {
+	card: {
+		fontFamily: 'Glamour',
 		width: '100%',
 		maxWidth: 400,
-		height: 350,
+		height: 450,
 		overflowY: 'auto',
 		margin: '0 auto',
-		fontFamily: 'Glamour',
 	},
 	list: {
 		width: 400,
@@ -43,14 +44,14 @@ class AdminDishes extends React.Component{
 	render() {
 		return (
 			<div>
-				<div style={styles.root}>
+				<Card style={styles.card}>
 					<List style={styles.list}>
 						<Link to="admin"><h3>Adminka</h3></Link>
 						{this.state.data.map((data) => (
 							<ListItem key={data._id} primaryText={`${data.dishName}`} rightIconButton={rightIconMenu}/>
 						))}
 					</List>
-				</div>
+				</Card>
 				<RaisedButton label="Add" secondary={true} style={styles.btn} />
 			</div>
 
