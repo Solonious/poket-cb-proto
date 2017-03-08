@@ -8,6 +8,7 @@ import AdminList from './AdminList'
 import AdminCategory from './AdminCategory';
 import AdminDishes from './AdminDishes';
 import addCategory from './addCategory';
+import addDish from './addDish';
 
 export {
 	App,
@@ -19,5 +20,6 @@ export {
 	AdminList,
 	AdminDishes,
 	AdminCategory,
-	addCategory
+	addCategory,
+    addDish,
 };

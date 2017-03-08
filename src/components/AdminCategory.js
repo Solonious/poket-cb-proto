@@ -2,7 +2,7 @@ import React from 'react';
 import {List, ListItem} from 'material-ui/List';
 import { rightIconMenu } from './IconBtnGroup';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 
 import { Link } from 'react-router';
 
