@@ -2,7 +2,7 @@ import Category from '../models/category';
 // import path from 'path';
 // import fs from 'fs';
 
-const getCategory = (req, res) => {
+const getCategories = (req, res) => {
 	// let Category = req.path.substring(1);
 	Category.find(null, null, { sort: {postDate: 1}}, (err,cat) => {
 		if(err) {
@@ -58,7 +58,7 @@ const deleteAllCategory = (req, res) => {
 };
 
 export {
-	getCategory,
+	getCategories,
 	postCategory,
 	deleteCategory,
 	deleteAllCategory

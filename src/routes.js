@@ -13,10 +13,10 @@ const routes = (
 	        <Route path="addcat" component={AddCategoryContainer}/>
 	        <Route path="adddish" component={AddDishContainer}/>
 	        <Route path="/admin/dishes" component={AdminDishes}/>
-	        <Route path="/:categoryId" component={Category}/>
+	        <Route path="/:catId/dishes" component={Category}/>
 	        <Route path="/:categoryId/:dishId" component={SingleDish}/>
-	        <Route path="/formsended" component={FormResult}/>
         </Route>
+		<Route path="/*" component={Home}/>
     </Router>
 );
 

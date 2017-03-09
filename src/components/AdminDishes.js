@@ -36,7 +36,7 @@ class AdminDishes extends React.Component{
 		}
 	}
 	componentDidMount() {
-		const url = 'http://localhost:8080/category/dishes';
+		const url = 'http://localhost:8080/dishes';
 		dishFetchData(url).then(data => {
 			this.setState({data: data});
 		});

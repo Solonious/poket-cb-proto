@@ -52,7 +52,7 @@ class Home extends React.Component {
 				>
 					 {this.state.data.map((tile) => (
 						<Link
-							to={`/${tile.name}`}
+							to={`/${tile.name}/dishes`}
 							className="btn-home"
 							style={styles.btn}
 							key={tile.id}

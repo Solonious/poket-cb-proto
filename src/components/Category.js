@@ -30,13 +30,14 @@ export default class Category extends React.Component {
   }
 
 	componentDidMount() {
-		const url = 'http://localhost:8080/category/dishes';
+        const { catId } = this.props.params;
+		const url = `http://localhost:8080/${catId}/dishes`;
 		dishesFetchData(url).then(data => {
 			this.setState({data: data});
 		});
 	}
 	render() {
-  	const { categoryId } = this.props.params;
+  	const { catId } = this.props.params;
 		return (
       <div style={styles.root}>
         <GridList
@@ -45,7 +46,7 @@ export default class Category extends React.Component {
         >
 					{this.state.data.map((tile) => (
 						<Link
-							to={`/${categoryId}/${tile.id}`}
+							to={`/${catId}/${tile.id}`}
 						  key={tile.id}
 						>
             <GridTile

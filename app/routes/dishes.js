@@ -1,7 +1,17 @@
 import Dish from '../models/dish';
 
-const getDishes = (req, res) => {
-	Dish.find(null, null, { sort: {postDate: 1}}, (err,dish) => {
+const getDishByCategory = (req, res) => {
+	const { catId } = req.params;
+	Dish.find({category: catId}, (err, dish) => {
+		if(err) {
+			res.send(err);
+		}
+		res.json(dish);
+	});
+};
+
+const getAllDishes = (req, res) => {
+	Dish.find({}, (err, dish) => {
 		if(err) {
 			res.send(err);
 		}
@@ -51,14 +61,14 @@ const postDish = (req, res) => {
 // 	});
 // }
 
-// const deleteCategory = (req, res) => {
-// 	Category.remove({ _id: req.params.id }, err => {
-// 		if(err) {
-// 			res.send(err);
-// 		}
-// 		res.json({message: 'successsfuly deleted'});
-// 	})
-// };
+const deleteDish = (req, res) => {
+	Dish.remove({ _id: req.params._id }, err => {
+		if(err) {
+			res.send(err);
+		}
+		res.json({message: 'successsfuly deleted'});
+	})
+};
 
 const deleteAllDishes = (req, res) => {
 	Dish.remove({}, err => {
@@ -68,9 +78,10 @@ const deleteAllDishes = (req, res) => {
 };
 
 export {
-	getDishes,
+	getDishByCategory,
+	getAllDishes,
 	getDish,
 	postDish,
-	// deleteCategory,
+	deleteDish,
 	deleteAllDishes
 };

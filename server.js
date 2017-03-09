@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 
-import { getCategory, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
-import { getDishes, postDish, getDish } from './app/routes/dishes';
+import { getCategories, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
+import { getDishByCategory, getAllDishes, postDish, getDish, deleteDish, deleteAllDishes } from './app/routes/dishes';
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -34,20 +34,24 @@ app.use((req, res, next) => {
 });
 
 app.route('/category')
-	.get(getCategory)
+	.get(getCategories)
 	.post(postCategory)
-	.delete(deleteCategory)
 	.delete(deleteAllCategory);
 
 app.route('/category/:id')
 	.delete(deleteCategory);
 
-app.route('/category/dishes')
-	.get(getDishes)
-	.post(postDish);
+app.route('/dishes')
+	.get(getAllDishes)
 
-app.route('/:categoryId/:dishId')
-	.get(getDish);
+app.route('/:catId/dishes')
+	.get(getDishByCategory)
+	.post(postDish)
+	.delete(deleteAllDishes);
+
+app.route('/category/dishes/:id')
+	.get(getDish)
+	.delete(deleteDish);
 
 // 	.get(getGames)
 //
