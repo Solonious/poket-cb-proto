@@ -52,7 +52,9 @@ class AdminDishes extends React.Component{
 						))}
 					</List>
 				</Card>
-				<RaisedButton label="Add" secondary={true} style={styles.btn} />
+				<Link to="adddish">
+					<RaisedButton label="Add" secondary={true} style={styles.btn} />
+				</Link>
 			</div>
 
 		)

@@ -43,9 +43,7 @@ app.route('/category/:id')
 	.delete(deleteCategory);
 
 app.route('/category/dishes')
-	.get(getDishes);
-
-app.route('/category/dish')
+	.get(getDishes)
 	.post(postDish);
 
 app.route('/:categoryId/:dishId')
