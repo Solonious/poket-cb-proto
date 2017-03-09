@@ -7,8 +7,9 @@ import SingleDish from './SingleDish';
 import AdminList from './AdminList'
 import AdminCategory from './AdminCategory';
 import AdminDishes from './AdminDishes';
-import addCategory from './addCategory';
+import CategoryForm from './CategoryForm';
 import addDish from './addDish';
+import FormResult from './FormResult';
 
 export {
 	App,
@@ -20,6 +21,7 @@ export {
 	AdminList,
 	AdminDishes,
 	AdminCategory,
-	addCategory,
+	CategoryForm,
+	FormResult,
     addDish,
 };

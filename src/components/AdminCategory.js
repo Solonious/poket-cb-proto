@@ -51,7 +51,9 @@ class AdminCategory extends React.Component{
 						))}
 					</List>
 				</Card>
+				<Link to="addcat">
 				<RaisedButton label="Add" secondary={true} style={styles.btn} />
+				</Link>
 			</div>
 
 		)

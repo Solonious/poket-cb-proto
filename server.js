@@ -36,6 +36,7 @@ app.use((req, res, next) => {
 app.route('/category')
 	.get(getCategory)
 	.post(postCategory)
+	.delete(deleteCategory)
 	.delete(deleteAllCategory);
 
 app.route('/category/:id')
