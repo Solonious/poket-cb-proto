@@ -26,6 +26,9 @@ const styles = {
 	img: {
 		width: '50%'
 	},
+	title: {
+		lineHeight: 0.1
+	}
 };
 
 class Home extends React.Component {
@@ -47,7 +50,7 @@ class Home extends React.Component {
 		return (
 			<div style={styles.root}>
 				<GridList
-					cellHeight={100}
+					cellHeight={'auto'}
 					style={styles.gridList}
 				>
 					 {this.state.data.map((tile) => (
@@ -58,7 +61,7 @@ class Home extends React.Component {
 							key={tile.id}
 						>
 							<img src={tile.src} style={styles.img} alt=""/>
-							<h3 style={styles.root}>{tile.name}</h3>
+							<h3 style={styles.title}>{tile.name}</h3>
 						</Link>
 					))}
 				</GridList>

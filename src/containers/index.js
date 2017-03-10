@@ -1,5 +1,5 @@
 import AddCategoryContainer from './AddCategoryContainer';
 import AddDishContainer from './AddDishContainer';
-import CategoryContainer from './CategoryContainer';
+import AdminCategoryContainer from './AdminCategoryContainer';
 
-export { AddCategoryContainer, AddDishContainer, CategoryContainer };
+export { AddCategoryContainer, AddDishContainer, AdminCategoryContainer };

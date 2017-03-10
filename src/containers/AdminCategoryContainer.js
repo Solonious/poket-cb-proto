@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Card } from 'material-ui/Card';
 import { CategoryListManager } from '../components';
 
-import { Link, hashHistory } from 'react-router';
+import { Link } from 'react-router';
 import { categoryFetchData } from '../libs/helpers';
 
 const styles = {
@@ -18,7 +18,7 @@ const styles = {
 	},
 };
 
-class CategoryContainer extends React.Component{
+class AdminCategoryContainer extends React.Component{
 	constructor() {
 		super();
 		this.state = {
@@ -72,4 +72,4 @@ class CategoryContainer extends React.Component{
 	}
 }
 
-export default CategoryContainer;
+export default AdminCategoryContainer;

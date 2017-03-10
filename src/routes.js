@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { Main, Category, Home, SingleDish, AdminList, AdminDishes } from './components';
-import { AddCategoryContainer, AddDishContainer, CategoryContainer } from './containers';
+import { AddCategoryContainer, AddDishContainer, AdminCategoryContainer } from './containers';
 
 // Use hashHistory for easier development
 const routes = (
@@ -9,7 +9,7 @@ const routes = (
         <Route path="/" component={Main} >
           <IndexRoute component={Home} />
 	        <Route path="admin" component={AdminList}/>
-	        <Route path="/admin/category"component={CategoryContainer}/>
+	        <Route path="/admin/category"component={AdminCategoryContainer}/>
 	        <Route path="addcat" component={AddCategoryContainer}/>
 	        <Route path="adddish" component={AddDishContainer}/>
 	        <Route path="/admin/dishes" component={AdminDishes}/>
