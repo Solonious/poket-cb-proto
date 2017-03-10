@@ -8,12 +8,14 @@ import Footer from './app/Footer';
 import SingleDish from './app/SingleDish';
 
 // admin components
-import CategoryListManager from './admin/CategoryListManager';
-import CategoryItemListAdmin from './admin/CategoryItemListAdmin';
 import AdminList from './admin/AdminList'
 import AdminDishes from './admin/AdminDishes';
+import CategoryItemListAdmin from './admin/CategoryItemListAdmin';
 import CategoryAddForm from './admin/CategoryAddForm';
-import addDish from './admin/addDish';
+import CategoryListManager from './admin/CategoryListManager';
+import DishAddForm from './admin/DishAddForm';
+import DishListManager from './admin/DishListManager';
+import DishItemListAdmin from './admin/DishItemListAdmin';
 
 export {
 	App,
@@ -26,6 +28,8 @@ export {
 	AdminDishes,
 	CategoryItemListAdmin,
 	CategoryAddForm,
-    addDish,
 	CategoryListManager,
+	DishAddForm,
+	DishListManager,
+	DishItemListAdmin,
 };

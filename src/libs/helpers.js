@@ -2,7 +2,7 @@ const YEAR = function getYear() {
     return new Date().getFullYear();
 }();
 
-const categoryFetchData = (url) => {
+const categoryFetchData = () => {
   const dataUrl = 'http://localhost:8080/category';
 
   return fetch(dataUrl)
@@ -37,7 +37,7 @@ const dishesFetchData = (url) => {
 				likes
 			}));
 		})
-}
+};
 
 const dishFetchData = (url) => {
   return fetch(url)

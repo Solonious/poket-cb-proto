@@ -28,11 +28,11 @@ class AddCategoryContainer extends React.Component {
 	}
 
 	handleSubmit() {
-		console.log('submit');
 		const data = {
 			name: this.state.name,
 			src: this.state.src
 		}
+
 		fetch('http://localhost:8080/category', {
 			headers: new Headers({
 				'Content-Type': 'application/json'

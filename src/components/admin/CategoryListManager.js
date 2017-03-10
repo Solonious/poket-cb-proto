@@ -9,7 +9,7 @@ const styles = {
 		height: 400,
 		margin: '0 auto'
 	},
-}
+};
 
 class CategoryListManager extends React.PureComponent {
 	render() {

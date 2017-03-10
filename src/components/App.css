@@ -20,7 +20,7 @@ h2 {
 }
 
 /*CategoryListItem*/
-.Admin-category-list:hover {
+.Admin-item-list:hover {
   background: ghostwhite;
 }
 .Delete-btn:hover {

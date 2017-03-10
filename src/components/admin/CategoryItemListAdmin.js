@@ -18,13 +18,13 @@ const styles = {
 		cursor: 'pointer',
 		alignItems: 'flex-end'
 	}
-}
+};
 
 class CategoryItemListAdmin extends React.PureComponent {
 	render() {
 		const { id, name, deleteCategory } = this.props;
 		return (
-				<li className="Admin-category-list" style={styles.root}>
+				<li className="Admin-item-list" style={styles.root}>
 					{`${name}`}
 					<button
 						className="Delete-btn"

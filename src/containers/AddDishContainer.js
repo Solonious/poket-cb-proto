@@ -1,21 +1,6 @@
 import React from 'react';
-import {Card} from 'material-ui/Card';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import { DishAddForm } from '../components';
 import { hashHistory } from 'react-router';
-
-const styles = {
-    card: {
-        width: '100%',
-        maxWidth: 400,
-        height: 450,
-        overflowY: 'auto',
-        margin: '0 auto',
-    },
-    btn: {
-        marginTop: 50
-    }
-};
 
 class AddDishContainer extends React.Component {
     constructor(props) {
@@ -56,7 +41,7 @@ class AddDishContainer extends React.Component {
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit() {
         const data = {
             dishName: this.state.name,
             srcImage: this.state.src,
@@ -89,34 +74,14 @@ class AddDishContainer extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <Card style={styles.card}>
-                    <h3>Add Dish</h3>
-                    <TextField
-                        value={this.state.name}
-                        floatingLabelText="Dish Name"
-                        onChange={this.handleChangeName}
-                    /><br />
-                    <TextField
-                        value={this.state.src}
-                        floatingLabelText="Image src"
-                        onChange={this.handleChangeSrc}
-                    /><br />
-                    <TextField
-                        value={this.state.category}
-                        floatingLabelText="Category"
-                        onChange={this.handleChangeCategory}
-                    /><br />
-                    <TextField
-                        value={this.state.description}
-                        floatingLabelText="Description"
-                        multiLine={true}
-                        rows={2}
-                        onChange={this.handleChangeDescription}
-                    /><br />
-                    <RaisedButton label="Add" type="submit" secondary={true} style={styles.btn} />
-                </Card>
-            </form>
+            <DishAddForm
+                data={this.state}
+                handleSubmit={this.handleSubmit}
+                handleChangeName={this.handleChangeName}
+                handleChangeSrc={this.handleChangeSrc}
+                handleChangeCategory={this.handleChangeCategory}
+                handleChangeDescription={this.handleChangeDescription}
+            />
         );
     }
 }

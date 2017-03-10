@@ -42,14 +42,14 @@ app.route('/category/:id') //checked
 	.delete(deleteCategory);
 
 app.route('/dishes')
-	.get(getAllDishes)
+	.get(getAllDishes);
 
 app.route('/:catId/dishes')
 	.get(getDishByCategory)
 	.post(postDish)
 	.delete(deleteAllDishes);
 
-app.route('/:catId/dishes/:id')
+app.route('/dishes/:id')
 	.get(getDish)
 	.delete(deleteDish);
 

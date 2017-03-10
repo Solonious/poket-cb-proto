@@ -1,5 +1,4 @@
 import React from 'react';
-// import { IconBtnDelete } from './IconBtnGroup';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card } from 'material-ui/Card';
 import { CategoryListManager } from '../components';
@@ -23,7 +22,7 @@ class AdminCategoryContainer extends React.Component{
 		super();
 		this.state = {
 			categories:[],
-		}
+		};
 		this.getCategory = this.getCategory.bind(this)
 		this.deleteCategory = this.deleteCategory.bind(this)
 	}
@@ -46,7 +45,6 @@ class AdminCategoryContainer extends React.Component{
 		})
 			.then(response => response.json())
 			.then(response => {
-				// The game is also removed from the state thanks to the filter function
 				this.setState({ categories: this.state.categories.filter(category => category._id !== id) });
 				console.log(response.message);
 				this.getCategory();
