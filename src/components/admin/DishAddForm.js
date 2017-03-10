@@ -55,7 +55,6 @@ class DishAddForm extends React.PureComponent{
                     <RaisedButton label="Add" type="submit" secondary={true} style={styles.btn} />
                 </Card>
             </form>
-
         );
     }
 }

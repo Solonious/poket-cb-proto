@@ -34,7 +34,6 @@ class DishItemListAdmin extends React.PureComponent {
                     &times;
                 </button>
             </li>
-
         )
     }
 }

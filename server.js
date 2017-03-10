@@ -39,7 +39,7 @@ app.route('/category')
 	.delete(deleteAllCategory);
 
 app.route('/category/:id') //checked
-	.delete(deleteCategory);
+	.delete(deleteCategory); //checked
 
 app.route('/dishes')
 	.get(getAllDishes);
@@ -50,18 +50,12 @@ app.route('/:catId/dishes')
 	.delete(deleteAllDishes);
 
 app.route('/dishes/:id')
-	.get(getDish)
-	.delete(deleteDish);
+	.get(getDish) //checked
+	.delete(deleteDish); //checked
 
-// 	.get(getGames)
-//
-// app.route('/games/:id')
-// 	.get(getGame)
-// 	.delete(deleteGame);
-//
-// app.route("*").get((req, res) => {
-// 	res.sendFile('client/dist/index.html', {root: __dirname});
-// });
+app.route("*").get((req, res) => {
+	res.sendFile('build/', {root: __dirname});
+});
 
 app.listen(port, () => {
 	console.log(`Listenning on port ${port}`);

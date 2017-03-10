@@ -34,7 +34,6 @@ class CategoryItemListAdmin extends React.PureComponent {
 						&times;
 					</button>
 				</li>
-
 		)
 	}
 }
