@@ -62,7 +62,7 @@ const postDish = (req, res) => {
 // }
 
 const deleteDish = (req, res) => {
-	Dish.remove({ _id: req.params._id }, err => {
+	Dish.remove({ _id: req.params.id }, err => {
 		if(err) {
 			res.send(err);
 		}
