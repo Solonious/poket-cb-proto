@@ -41,23 +41,23 @@ class Category extends React.Component {
           cellHeight={180}
           style={styles.gridList}
         >
-					{this.state.data.map((tile) => (
-						<Link
-							to={`/${catId}/dishes/${tile.id}`}
-						  key={tile.id}
-						>
-            <GridTile
-              key={tile.id}
-              title={tile.dishName}
-              actionIcon={<IconButton><StarBorder color="white"/></IconButton>}
-            >
-	              <img src={tile.srcImage} alt=""/>
-            </GridTile>
-						</Link>
-					))}
+            {this.state.data.map((tile) => (
+                <Link
+                    to={`/${catId}/dishes/${tile.id}`}
+                    key={tile.id}
+                >
+                    <GridTile
+                        key={tile.id}
+                        title={tile.dishName}
+                        actionIcon={<IconButton><StarBorder color="white"/></IconButton>}
+                    >
+	                    <img src={tile.srcImage} alt=""/>
+                    </GridTile>
+                </Link>
+            ))}
         </GridList>
       </div>
-		);
+        );
 	};
 }
 
