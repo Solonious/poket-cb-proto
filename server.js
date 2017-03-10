@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 
 import { getCategories, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
-import { getDishByCategory, getAllDishes, postDish, getDish, deleteDish, deleteAllDishes } from './app/routes/dishes';
+import { getDishesByCategory, getAllDishes, postDish, getDish, deleteDish, deleteAllDishes } from './app/routes/dishes';
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -45,16 +45,19 @@ app.route('/dishes')
 	.get(getAllDishes);
 
 app.route('/:catId/dishes')
-	.get(getDishByCategory)
+	.get(getDishesByCategory)
 	.post(postDish)
 	.delete(deleteAllDishes);
-
+/// adminka
 app.route('/dishes/:id')
 	.get(getDish) //checked
 	.delete(deleteDish); //checked
 
+app.route('/:catId/dishes/:id')
+	.get(getDish);
+
 app.route("*").get((req, res) => {
-	res.sendFile('build/', {root: __dirname});
+	res.sendFile('build/index.html', {root: __dirname});
 });
 
 app.listen(port, () => {

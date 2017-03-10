@@ -28,7 +28,7 @@ class Category extends React.Component {
 
 	componentDidMount() {
         const { catId } = this.props.params;
-		const url = `http://localhost:8080/${catId}/dishes`;
+		const url = `http://localhost:8080/${catId}/dishes/`;
 		dishesFetchData(url).then(data => {
 			this.setState({data: data});
 		});

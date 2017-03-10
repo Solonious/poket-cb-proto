@@ -1,6 +1,6 @@
 import Dish from '../models/dish';
 
-const getDishByCategory = (req, res) => {
+const getDishesByCategory = (req, res) => {
 	const { catId } = req.params;
 	Dish.find({category: catId}, (err, dish) => {
 		if(err) {
@@ -78,7 +78,7 @@ const deleteAllDishes = (req, res) => {
 };
 
 export {
-	getDishByCategory,
+	getDishesByCategory,
 	getAllDishes,
 	getDish,
 	postDish,
