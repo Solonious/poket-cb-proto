@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {List} from 'material-ui/List';
-import { CategoryAdmin } from '../index';
+import { CategoryItemListAdmin } from '../index';
 
 const styles = {
 	list: {
@@ -17,7 +17,7 @@ class CategoryListManager extends React.PureComponent {
 		return (
 			<List style={styles.list}>
 				{categories.map((data) => (
-						<CategoryAdmin
+						<CategoryItemListAdmin
 							key={data.id}
 							{...data}
 						  deleteCategory={deleteCategory}

@@ -24,9 +24,13 @@ class CategoryContainer extends React.Component{
 		this.state = {
 			categories:[],
 		}
+		this.getCategory = this.getCategory.bind(this)
 		this.deleteCategory = this.deleteCategory.bind(this)
 	}
 	componentDidMount() {
+		this.getCategory()
+	}
+	getCategory() {
 		categoryFetchData().then(categories => {
 			this.setState({
 				categories,
@@ -45,7 +49,7 @@ class CategoryContainer extends React.Component{
 				// The game is also removed from the state thanks to the filter function
 				this.setState({ categories: this.state.categories.filter(category => category._id !== id) });
 				console.log(response.message);
-				// hashHistory.push('/admin/category');
+				this.getCategory();
 			});
 	}
 	render() {

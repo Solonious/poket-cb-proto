@@ -19,6 +19,14 @@ h2 {
   font-family: Glamour, sans-serif;
 }
 
+/*CategoryListItem*/
+.Admin-category-list:hover {
+  background: ghostwhite;
+}
+.Delete-btn:hover {
+  opacity: 0.5;
+}
+
 @keyframes App-book-scale {
   0% { transform: scale(1); }
   50% { transform: scale(1.2); }

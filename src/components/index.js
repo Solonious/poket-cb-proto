@@ -9,7 +9,7 @@ import SingleDish from './app/SingleDish';
 
 // admin components
 import CategoryListManager from './admin/CategoryListManager';
-import CategoryAdmin from './admin/CategoryAdmin';
+import CategoryItemListAdmin from './admin/CategoryItemListAdmin';
 import AdminList from './admin/AdminList'
 import AdminDishes from './admin/AdminDishes';
 import CategoryForm from './admin/CategoryForm';
@@ -24,7 +24,7 @@ export {
 	SingleDish,
 	AdminList,
 	AdminDishes,
-	CategoryAdmin,
+	CategoryItemListAdmin,
 	CategoryForm,
     addDish,
 	CategoryListManager,
