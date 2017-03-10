@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './Footer.css';
-import { YEAR } from '../libs/helpers';
+import { YEAR } from '../../libs/helpers';
 
-class Footer extends Component {
+class Footer extends React.PureComponent {
 
     render() {
         return (

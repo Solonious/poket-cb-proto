@@ -5,7 +5,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 import { Link } from 'react-router';
 
-import { dishesFetchData } from '../libs/helpers';
+import { dishesFetchData } from '../../libs/helpers';
 
 const styles = {
     root: {
@@ -20,10 +20,7 @@ const styles = {
     },
 };
 
-/**
- * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
- */
-export default class Category extends React.Component {
+class Category extends React.Component {
   constructor() {
     super();
     this.state = {data: []};
@@ -46,7 +43,7 @@ export default class Category extends React.Component {
         >
 					{this.state.data.map((tile) => (
 						<Link
-							to={`/${catId}/${tile.id}`}
+							to={`/${catId}/dishes/${tile.id}`}
 						  key={tile.id}
 						>
             <GridTile
@@ -63,3 +60,5 @@ export default class Category extends React.Component {
 		);
 	};
 }
+
+export default Category;

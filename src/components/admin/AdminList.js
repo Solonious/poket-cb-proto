@@ -21,7 +21,7 @@ const styles = {
 	},
 };
 
-class AdminList extends React.Component {
+class AdminList extends React.PureComponent {
 	render() {
 		return (
 			<div>

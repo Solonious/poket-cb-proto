@@ -1,0 +1,13 @@
+.list {
+list-style-type: none;
+	display: block;
+}
+
+.DeleteBtn {
+	float: right;
+	border: 0;
+	background-color: transparent;
+	font-size: 1rem;
+	cursor: pointer;
+	color: darkred;
+}

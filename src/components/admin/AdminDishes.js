@@ -1,21 +1,14 @@
 import React from 'react';
 import {List, ListItem} from 'material-ui/List';
-import { rightIconMenu } from './IconBtnGroup';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Card } from 'material-ui/Card';
 
 import { Link } from 'react-router';
 
-import { categoryFetchData } from '../libs/helpers';
-
+import { dishFetchData } from '../../libs/helpers';
+import { Card } from 'material-ui/Card';
 
 
 const styles = {
-	list: {
-		width: 400,
-		height: 400,
-		margin: '0 auto'
-	},
 	card: {
 		fontFamily: 'Glamour',
 		width: '100%',
@@ -24,9 +17,17 @@ const styles = {
 		overflowY: 'auto',
 		margin: '0 auto',
 	},
+	list: {
+		width: 400,
+		height: 450,
+		margin: '0 auto'
+	},
+	btn: {
+		margin: 12
+	}
 };
 
-class AdminCategory extends React.Component{
+class AdminDishes extends React.Component{
 	constructor() {
 		super();
 		this.state = {
@@ -34,25 +35,24 @@ class AdminCategory extends React.Component{
 		}
 	}
 	componentDidMount() {
-		categoryFetchData().then(data => {
-			this.setState({
-				data,
-			});
+		const url = 'http://localhost:8080/dishes';
+		dishFetchData(url).then(data => {
+			this.setState({data: data});
 		});
 	}
 	render() {
 		return (
 			<div>
 				<Card style={styles.card}>
-					<Link to="admin"><h3>Adminka</h3></Link>
 					<List style={styles.list}>
+						<Link to="admin"><h3>Adminka</h3></Link>
 						{this.state.data.map((data) => (
-							<ListItem key={data.id} primaryText={`${data.name}`} rightIconButton={rightIconMenu}/>
+							<li key={data._id}>{`${data.dishName}`}</li>
 						))}
 					</List>
 				</Card>
-				<Link to="addcat">
-				<RaisedButton label="Add" secondary={true} style={styles.btn} />
+				<Link to="adddish">
+					<RaisedButton label="Add" secondary={true} style={styles.btn} />
 				</Link>
 			</div>
 
@@ -60,4 +60,4 @@ class AdminCategory extends React.Component{
 	}
 }
 
-export default AdminCategory;
+export default AdminDishes;

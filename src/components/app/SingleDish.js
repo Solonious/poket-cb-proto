@@ -3,7 +3,7 @@ import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Car
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router';
 
-import { dishFetchData } from '../libs/helpers';
+import { dishFetchData } from '../../libs/helpers';
 
 const styles = {
 	card: {
@@ -23,14 +23,14 @@ class SingleDish extends React.Component {
 
 	componentDidMount() {
 		const { categoryId, dishId } = this.props.params;
-		const url = `http://localhost:8080/${categoryId}/${dishId}`;
+		const url = `http://localhost:8080/${categoryId}/dishes/${dishId}`;
 		dishFetchData(url).then(data => {
 			this.setState({data: data});
 		});
 	}
 	render() {
 		const { category, dishName, description, srcImage } = this.state.data;
-		const { categoryId } = this.props.params;
+		const { catId } = this.props.params;
 		return (
 			<Card style={styles.card}>
 				<CardMedia
@@ -44,7 +44,7 @@ class SingleDish extends React.Component {
 				<CardTitle title={dishName} subtitle={category}/>
 				<CardText>{description}</CardText>
 				<CardActions>
-					<Link to={`/${categoryId}`}>
+					<Link to={`/${catId}/dishes`}>
 						<FlatButton label="Return"/>
 					</Link>
 

@@ -16,7 +16,7 @@ const styles = {
     }
 };
 
-class addDish extends React.Component{
+class addDish extends React.PureComponent{
     render() {
         return (
             <Card style={styles.card}>

@@ -1,15 +1,19 @@
+
 import App from './App';
 import Main from './Main';
-import Home from './Home';
-import Category from './Category';
-import Footer from './Footer';
-import SingleDish from './SingleDish';
-import AdminList from './AdminList'
-import AdminCategory from './AdminCategory';
-import AdminDishes from './AdminDishes';
-import CategoryForm from './CategoryForm';
-import addDish from './addDish';
-import FormResult from './FormResult';
+import Home from './app/Home';
+// app components
+import Category from './app/Category';
+import Footer from './app/Footer';
+import SingleDish from './app/SingleDish';
+
+// admin components
+import CategoryListManager from './admin/CategoryListManager';
+import CategoryAdmin from './admin/CategoryAdmin';
+import AdminList from './admin/AdminList'
+import AdminDishes from './admin/AdminDishes';
+import CategoryForm from './admin/CategoryForm';
+import addDish from './admin/addDish';
 
 export {
 	App,
@@ -20,8 +24,8 @@ export {
 	SingleDish,
 	AdminList,
 	AdminDishes,
-	AdminCategory,
+	CategoryAdmin,
 	CategoryForm,
-	FormResult,
     addDish,
+	CategoryListManager,
 };

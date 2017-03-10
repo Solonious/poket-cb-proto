@@ -34,11 +34,11 @@ app.use((req, res, next) => {
 });
 
 app.route('/category')
-	.get(getCategories)
+	.get(getCategories) //checked
 	.post(postCategory)
 	.delete(deleteAllCategory);
 
-app.route('/category/:id')
+app.route('/category/:id') //checked
 	.delete(deleteCategory);
 
 app.route('/dishes')
@@ -49,7 +49,7 @@ app.route('/:catId/dishes')
 	.post(postDish)
 	.delete(deleteAllDishes);
 
-app.route('/category/dishes/:id')
+app.route('/:catId/dishes/:id')
 	.get(getDish)
 	.delete(deleteDish);
 

@@ -20,8 +20,8 @@ const getAllDishes = (req, res) => {
 };
 
 const getDish = (req, res) => {
-	const { dishId } = req.params;
-	Dish.findById(dishId, (err, dish) => {
+	const { id } = req.params;
+	Dish.findById(id, (err, dish) => {
 		if(err) {
 			res.send(err);
 		}

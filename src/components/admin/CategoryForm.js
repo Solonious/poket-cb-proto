@@ -2,7 +2,6 @@ import React from 'react';
 import {Card} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-// import { hashHistory } from 'react-router';
 
 const styles = {
 	card: {
@@ -17,10 +16,9 @@ const styles = {
 	}
 };
 
-class CategoryForm extends React.Component{
+class CategoryForm extends React.PureComponent{
 
 	render() {
-		console.log(this.props);
 		return (
 			<Card style={styles.card}>
 				<h3>Add category</h3>
