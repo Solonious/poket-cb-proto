@@ -1,5 +1,4 @@
 import React from 'react';
-// import { CategoryForm } from '../components';
 import {Card} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';

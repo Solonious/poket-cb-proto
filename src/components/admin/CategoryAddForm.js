@@ -16,25 +16,29 @@ const styles = {
 	}
 };
 
-class CategoryForm extends React.PureComponent{
-
+class CategoryAddForm extends React.PureComponent{
 	render() {
+		console.log(this.props);
+		const { handleSubmit, handleChangeName, handleChangeSrc, data } = this.props;
 		return (
+			<form onSubmit={()=>{handleSubmit()}}>
 			<Card style={styles.card}>
 				<h3>Add category</h3>
 					<TextField
+						value={data.name}
 						floatingLabelText="Category Name"
-						onChange={this.props.handleChangeName}
+						onChange={handleChangeName}
 					/><br />
 					<TextField
-						value={this.props.data.src}
+						value={data.src}
 						floatingLabelText="Image src"
-						onChange={this.props.handleChangeSrc}
+						onChange={handleChangeSrc}
 					/><br />
-					<RaisedButton label="Add" onSubmit={this.props.handleSubmit} secondary={true} style={styles.btn} />
+					<RaisedButton label="Add" type="submit" secondary={true} style={styles.btn} />
 			</Card>
+			</form>
 		);
 	}
 }
 
-export default CategoryForm;
+export default CategoryAddForm;

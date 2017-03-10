@@ -12,7 +12,7 @@ import CategoryListManager from './admin/CategoryListManager';
 import CategoryItemListAdmin from './admin/CategoryItemListAdmin';
 import AdminList from './admin/AdminList'
 import AdminDishes from './admin/AdminDishes';
-import CategoryForm from './admin/CategoryForm';
+import CategoryAddForm from './admin/CategoryAddForm';
 import addDish from './admin/addDish';
 
 export {
@@ -25,7 +25,7 @@ export {
 	AdminList,
 	AdminDishes,
 	CategoryItemListAdmin,
-	CategoryForm,
+	CategoryAddForm,
     addDish,
 	CategoryListManager,
 };

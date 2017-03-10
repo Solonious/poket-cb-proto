@@ -1,22 +1,7 @@
 import React from 'react';
-// import { CategoryForm } from '../components';
-import {Card} from 'material-ui/Card';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import { hashHistory } from 'react-router';
+import { CategoryAddForm } from '../components';
 
-const styles = {
-	card: {
-		width: '100%',
-		maxWidth: 400,
-		height: 450,
-		overflowY: 'auto',
-		margin: '0 auto',
-	},
-	btn: {
-		marginTop: 50
-	}
-};
+import { hashHistory } from 'react-router';
 
 class AddCategoryContainer extends React.Component {
 	constructor(props) {
@@ -42,7 +27,8 @@ class AddCategoryContainer extends React.Component {
 		});
 	}
 
-	handleSubmit(event) {
+	handleSubmit() {
+		console.log('submit');
 		const data = {
 			name: this.state.name,
 			src: this.state.src
@@ -68,25 +54,14 @@ class AddCategoryContainer extends React.Component {
 		})
 
 	}
-
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-			<Card style={styles.card}>
-				<h3>Add category</h3>
-				<TextField
-					value={this.state.name}
-					floatingLabelText="Category Name"
-					onChange={this.handleChangeName}
-				/><br />
-				<TextField
-					value={this.state.src}
-					floatingLabelText="Image src"
-					onChange={this.handleChangeSrc}
-				/><br />
-				<RaisedButton label="Add" type="submit" secondary={true} style={styles.btn} />
-			</Card>
-			</form>
+			<CategoryAddForm
+				data={this.state}
+				handleSubmit={this.handleSubmit}
+				handleChangeName={this.handleChangeName}
+				handleChangeSrc={this.handleChangeSrc}
+			/>
 		);
 	}
 }
