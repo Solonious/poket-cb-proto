@@ -49,7 +49,6 @@ class AdminDishContainer extends React.Component{
             .then(response => {
                 this.setState({ dishes: this.state.dishes.filter(dish => dish._id !== id) });
                 console.log(response.message);
-                this.getDish();
             });
     }
     render() {
@@ -67,7 +66,6 @@ class AdminDishContainer extends React.Component{
                     <RaisedButton label="Add" secondary={true} style={styles.btn} />
                 </Link>
             </div>
-
         )
     }
 }

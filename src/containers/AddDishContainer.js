@@ -2,22 +2,31 @@ import React from 'react';
 import { DishAddForm } from '../components';
 import { hashHistory } from 'react-router';
 
+import { categoryFetchData } from '../libs/helpers';
+
 class AddDishContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
             src: '',
-            category: '',
-            description: ''
+            category: {
+	            index: '',
+	            value: ''
+            },
+            description: '',
+            categories: []
         };
-
+        this.getCategoryData = this.getCategoryData.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeSrc = this.handleChangeSrc.bind(this);
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.handleChangeDescription = this.handleChangeDescription.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.formClear = this.formClear.bind(this)
+    }
+    componentDidMount() {
+        this.getCategoryData();
     }
 
     handleChangeName(event) {
@@ -30,12 +39,17 @@ class AddDishContainer extends React.Component {
             src: event.target.value
         });
     }
-    handleChangeCategory(event) {
-        this.setState({
-            category: event.target.value
-        });
-    }
-    handleChangeDescription(event) {
+	handleChangeCategory (event, index, value) {
+		const { categories } = this.state;
+		this.setState({
+			category: {
+        value: categories[index],
+        index
+      }
+		});
+	}
+
+	handleChangeDescription(event) {
         this.setState({
             description: event.target.value
         });
@@ -45,7 +59,7 @@ class AddDishContainer extends React.Component {
         const data = {
             dishName: this.state.name,
             srcImage: this.state.src,
-            category: this.state.category,
+            category: this.state.category.value,
             description: this.state.description,
         };
         fetch('http://localhost:8080/category/dishes', {
@@ -66,10 +80,22 @@ class AddDishContainer extends React.Component {
         this.setState({
             name: '',
             src: '',
-            category: '',
+            category: {
+	            index: 0,
+	            value: '',
+            },
             description: ''
         })
 
+    }
+    getCategoryData() {
+	      categoryFetchData().then(category => {
+		        this.setState({
+			          categories: category.map((item) => {
+				          return item['name']
+			          })
+		        });
+	      });
     }
 
     render() {

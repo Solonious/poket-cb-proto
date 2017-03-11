@@ -24,13 +24,11 @@ class SingleDish extends React.Component {
 	componentDidMount() {
 		const { catId, dishId } = this.props.params;
 		const url = `http://localhost:8080/${catId}/dishes/${dishId}`;
-		console.log(url);
 		dishFetchData(url).then(data => {
 			this.setState({data: data});
 		});
 	}
 	render() {
-		console.log(this.state);
 		const { category, dishName, description, srcImage } = this.state.data;
 		const { catId } = this.props.params;
 		return (

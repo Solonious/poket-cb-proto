@@ -3,6 +3,8 @@ import {Card} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import { SelectFieldCustom } from '../../components';
+
 const styles = {
     card: {
         width: '100%',
@@ -40,11 +42,12 @@ class DishAddForm extends React.PureComponent{
                         floatingLabelText="Image src"
                         onChange={handleChangeSrc}
                     /><br />
-                    <TextField
-                        value={data.category}
-                        floatingLabelText="Category"
-                        onChange={handleChangeCategory}
-                    /><br />
+                    <SelectFieldCustom
+                      items={data.categories}
+                      value={data.category.index}
+                      handleChangeCategory={handleChangeCategory}
+                    />
+                    <br />
                     <TextField
                         value={data.description}
                         floatingLabelText="Description"

@@ -4,7 +4,6 @@ const YEAR = function getYear() {
 
 const categoryFetchData = () => {
   const dataUrl = 'http://localhost:8080/category';
-
   return fetch(dataUrl)
     .then(res => {
         return res.json();
@@ -12,7 +11,6 @@ const categoryFetchData = () => {
     .then(data => {
         return data.map(({ _id, name, src }) => ({ id: _id, name, src}));
     })
-
 };
 
 const dishesFetchData = (url) => {
