@@ -3,6 +3,8 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { Main, Category, Home, SingleDish, AdminList } from './components';
 import { AddCategoryContainer, AddDishContainer, AdminCategoryContainer, AdminDishContainer } from './containers';
 
+import UploadForm from './components/admin/UploadForm';
+
 // Use hashHistory for easier development
 const routes = (
     <Router history={hashHistory}>
@@ -15,8 +17,9 @@ const routes = (
 	        <Route path="/admin/dishes" component={AdminDishContainer}/>
 	        <Route path="/:catId/dishes" component={Category}/>
 	        <Route path="/:catId/dishes/:dishId" component={SingleDish}/>
+	        <Route path="upload" component={UploadForm}></Route>
+	        <Route path="*" component={Home}/>
         </Route>
-		<Route path="*" component={Home}/>
     </Router>
 );
 

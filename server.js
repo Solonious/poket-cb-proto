@@ -3,8 +3,16 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 
+import fs from 'fs';
+import multer from 'multer';
+
+var upload = multer({
+	dest: 'build/static/media/upload'
+});
+
 import { getCategories, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
 import { getDishesByCategory, getAllDishes, postDish, getDish, deleteDish, deleteAllDishes } from './app/routes/dishes';
+
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -56,8 +64,8 @@ app.route('/dishes/:id')
 app.route('/:catId/dishes/:id')
 	.get(getDish);
 
-app.route("*").get((req, res) => {
-	res.sendFile('build/index.html', {root: __dirname});
+app.post('/upload', upload.single('userFile'), (req, res) =>{
+	res.send(`First test ${JSON.stringify(req.file)}`)
 });
 
 app.listen(port, () => {

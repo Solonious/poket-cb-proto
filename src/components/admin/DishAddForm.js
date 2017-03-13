@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { SelectFieldCustom } from '../../components';
+import DropzoneDemo from '../../components/admin/UploadForm';
 
 const styles = {
     card: {
@@ -32,6 +33,7 @@ class DishAddForm extends React.PureComponent{
             <form onSubmit={()=> {handleSubmit()}}>
                 <Card style={styles.card}>
                     <h3>Add Dish</h3>
+                    <DropzoneDemo/>
                     <TextField
                         value={data.name}
                         floatingLabelText="Dish Name"

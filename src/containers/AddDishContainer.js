@@ -23,7 +23,7 @@ class AddDishContainer extends React.Component {
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.handleChangeDescription = this.handleChangeDescription.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.formClear = this.formClear.bind(this)
+        this.formClear = this.formClear.bind(this);
     }
     componentDidMount() {
         this.getCategoryData();
@@ -54,7 +54,6 @@ class AddDishContainer extends React.Component {
             description: event.target.value
         });
     }
-
     handleSubmit() {
         const data = {
             dishName: this.state.name,
