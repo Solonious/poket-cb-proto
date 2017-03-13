@@ -3,8 +3,7 @@ import {Card} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { SelectFieldCustom } from '../../components';
-import DropzoneDemo from '../../components/admin/UploadForm';
+import { SelectFieldCustom, ImageUpload } from '../../components';
 
 const styles = {
     card: {
@@ -24,25 +23,23 @@ class DishAddForm extends React.PureComponent{
         const {
             handleSubmit,
             handleChangeName,
-            handleChangeSrc,
             handleChangeCategory,
             handleChangeDescription,
-            data
+            data,
+            onImageDrop,
         } = this.props;
+
         return (
             <form onSubmit={()=> {handleSubmit()}}>
                 <Card style={styles.card}>
                     <h3>Add Dish</h3>
-                    <DropzoneDemo/>
+                    <ImageUpload
+                        data={data}
+                        onImageDrop={onImageDrop}/>
                     <TextField
                         value={data.name}
                         floatingLabelText="Dish Name"
                         onChange={handleChangeName}
-                    /><br />
-                    <TextField
-                        value={data.src}
-                        floatingLabelText="Image src"
-                        onChange={handleChangeSrc}
                     /><br />
                     <SelectFieldCustom
                       items={data.categories}

@@ -3,6 +3,11 @@ import { DishAddForm } from '../components';
 import { hashHistory } from 'react-router';
 
 import { categoryFetchData } from '../libs/helpers';
+import request from 'superagent';
+
+const CLOUDINARY_UPLOAD_PRESET = 'jfdnt3qv';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/pocket-cb-proto/upload';
+
 
 class AddDishContainer extends React.Component {
     constructor(props) {
@@ -15,15 +20,18 @@ class AddDishContainer extends React.Component {
 	            value: ''
             },
             description: '',
-            categories: []
+            categories: [],
+            uploadedFile: null,
+            uploadedFileCloudinaryUrl: ''
         };
         this.getCategoryData = this.getCategoryData.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
-        this.handleChangeSrc = this.handleChangeSrc.bind(this);
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.handleChangeDescription = this.handleChangeDescription.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.formClear = this.formClear.bind(this);
+        this.onImageDrop = this.onImageDrop.bind(this);
+
     }
     componentDidMount() {
         this.getCategoryData();
@@ -32,11 +40,6 @@ class AddDishContainer extends React.Component {
     handleChangeName(event) {
         this.setState({
             name: event.target.value
-        });
-    }
-    handleChangeSrc(event) {
-        this.setState({
-            src: event.target.value
         });
     }
 	handleChangeCategory (event, index, value) {
@@ -96,6 +99,32 @@ class AddDishContainer extends React.Component {
 		        });
 	      });
     }
+    onImageDrop(files) {
+        this.setState({
+            uploadedFile: files[0]
+        });
+
+        this.handleImageUpload(files[0]);
+    }
+    handleImageUpload(file) {
+        let upload = request.post(CLOUDINARY_UPLOAD_URL)
+            .field('api_key', '883455887117763')
+            .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+            .field('file', file);
+
+        upload.end((err, response) => {
+            if (err) {
+                console.error(err);
+            }
+
+            if (response.body.secure_url !== '') {
+                this.setState({
+                    uploadedFileCloudinaryUrl: response.body.secure_url,
+                    src: response.body.secure_url,
+                });
+            }
+        });
+    }
 
     render() {
         return (
@@ -103,9 +132,9 @@ class AddDishContainer extends React.Component {
                 data={this.state}
                 handleSubmit={this.handleSubmit}
                 handleChangeName={this.handleChangeName}
-                handleChangeSrc={this.handleChangeSrc}
                 handleChangeCategory={this.handleChangeCategory}
                 handleChangeDescription={this.handleChangeDescription}
+                onImageDrop={this.onImageDrop}
             />
         );
     }
