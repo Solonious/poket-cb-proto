@@ -3,13 +3,6 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 
-// import fs from 'fs';
-// import multer from 'multer';
-//
-// var upload = multer({
-// 	dest: 'build/static/media/upload'
-// });
-
 import { getCategories, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
 import { getDishesByCategory, getAllDishes, postDish, getDish, deleteDish, deleteAllDishes } from './app/routes/dishes';
 
@@ -21,8 +14,7 @@ const options = {
 	replset: {socketOptions: {keepAlive: 1, connectTimeoutMS: 30000}}
 };
 
-mongoose.Promise = global.Promise;
-
+// mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/poket-cb-proto', options);
 
 const db = mongoose.connection;
@@ -42,12 +34,12 @@ app.use((req, res, next) => {
 });
 
 app.route('/category')
-	.get(getCategories) //checked
+	.get(getCategories)
 	.post(postCategory)
 	.delete(deleteAllCategory);
 
-app.route('/category/:id') //checked
-	.delete(deleteCategory); //checked
+app.route('/category/:id')
+	.delete(deleteCategory);
 
 app.route('/dishes')
 	.get(getAllDishes);
@@ -58,15 +50,11 @@ app.route('/:catId/dishes')
 	.delete(deleteAllDishes);
 /// adminka
 app.route('/dishes/:id')
-	.get(getDish) //checked
-	.delete(deleteDish); //checked
+	.get(getDish)
+	.delete(deleteDish);
 
 app.route('/:catId/dishes/:id')
 	.get(getDish);
-
-// app.post('/upload', upload.single('userFile'), (req, res) =>{
-// 	res.send(`First test ${JSON.stringify(req.file)}`)
-// });
 
 app.listen(port, () => {
 	console.log(`Listenning on port ${port}`);

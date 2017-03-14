@@ -8,7 +8,6 @@ const styles = {
         justifyContent: 'space-between',
         paddingLeft: '3rem',
         paddingRight: 30,
-
     },
     btn: {
         border: 0,

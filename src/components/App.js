@@ -1,6 +1,5 @@
 import React from 'react';
 import Footer from './app/Footer';
-
 import { Link } from 'react-router';
 
 import cooking from '../img/cooking.svg';

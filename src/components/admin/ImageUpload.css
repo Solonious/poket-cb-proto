@@ -1,22 +1,15 @@
-
-.imgPreview {
-	font-size:0.5rem;
-	text-align: center;
-	margin: 5px 15px;
-	height: 100%;
-	width: 90%;
-	border: 0;
+.container {
+	width: 15rem;
+	margin: 0 auto;
 	font-family: Glamour;
+	font-size: 0.7em;
+	border: 2px dashed black;
+	border-radius: 5px;
+	padding: 15px;
 }
-
-.imgPreview img {
+.image-prew {
+	max-width: 400px;
 	width: 50%;
-	height: 100%;
-}
-.imgPreview img:hover {
-	cursor: pointer;
-}
-.previewText {
-	width: 100%;
-	margin-top: 20px;
+	padding: 15px;
+	margin: 0 auto;
 }

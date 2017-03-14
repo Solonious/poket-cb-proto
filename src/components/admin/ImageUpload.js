@@ -3,36 +3,23 @@ import Dropzone from 'react-dropzone';
 
 import './ImageUpload.css';
 
-const styles = {
-	dropzone: {
-		width: 'auto',
-		height: 80,
-		fontFamily: 'Glamour',
-		fonSize: '0.1em'
-	},
-	image: {
-		width: 'auto'
-	}
-};
-
-class ImageUpload extends React.Component {
+class ImageUpload extends React.PureComponent {
 
 	render() {
 		const { onImageDrop, data } = this.props;
 		return (
 			<div>
-				<div className="FileUpload">
-					<Dropzone
+				<div>
+					<Dropzone className="container"
 						onDrop={onImageDrop}
 						multiple={false}
 						accept="image/*">
 						<div>Drop an image or click to select a file to upload.</div>
 					</Dropzone>
 				</div>
-
 				<div>
 					{data.uploadedFileCloudinaryUrl === '' ? null :
-						<div>
+						<div className="image-prew">
 							<img src={data.uploadedFileCloudinaryUrl} alt=""/>
 						</div>}
 				</div>

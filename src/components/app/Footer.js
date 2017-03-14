@@ -4,7 +4,6 @@ import './Footer.css';
 import { YEAR } from '../../libs/helpers';
 
 class Footer extends React.PureComponent {
-
     render() {
         return (
             <div className="Footer">

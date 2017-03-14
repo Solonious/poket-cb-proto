@@ -20,7 +20,6 @@ class SingleDish extends React.Component {
 		super();
 		this.state = {data: []};
 	}
-
 	componentDidMount() {
 		const { catId, dishId } = this.props.params;
 		const url = `http://localhost:8080/${catId}/dishes/${dishId}`;
@@ -47,7 +46,6 @@ class SingleDish extends React.Component {
 					<Link to={`/${catId}/dishes`}>
 						<FlatButton label="Return"/>
 					</Link>
-
 				</CardActions>
 			</Card>
 		);

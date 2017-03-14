@@ -4,7 +4,6 @@ import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 import { Link } from 'react-router';
-
 import { dishesFetchData } from '../../libs/helpers';
 
 const styles = {
@@ -25,9 +24,8 @@ class Category extends React.Component {
     super();
     this.state = {data: []};
   }
-
 	componentDidMount() {
-        const { catId } = this.props.params;
+		const { catId } = this.props.params;
 		const url = `http://localhost:8080/${catId}/dishes/`;
 		dishesFetchData(url).then(data => {
 			this.setState({data: data});

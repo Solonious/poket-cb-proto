@@ -1,5 +1,13 @@
 import Dish from '../models/dish';
 
+import cloudinary from 'cloudinary'
+
+cloudinary.config({
+	cloud_name: 'dkr4ewoys',
+	api_key: '883455887117763',
+	api_secret: 'NcskWG1bwFalgi6Zrn-_4CUZBDc'
+});
+
 const getDishesByCategory = (req, res) => {
 	const { catId } = req.params;
 	Dish.find({category: catId}, (err, dish) => {
@@ -27,23 +35,10 @@ const getDish = (req, res) => {
 		}
 		res.json(dish);
 	});
-
 };
 
-// const getGame = (req, res) => {
-// 	const { id } = req.params;
-//
-// 	Game.findById(id, (err, game) => {
-// 		if(err) {
-// 			res.send(err);
-// 		}
-// 		res.json(game);
-// 	});
-// }
-//
 const postDish = (req, res) => {
 	let dish = Object.assign(new Dish(), req.body);
-
 	dish.save(err => {
 		if(err) {
 			res.send(err);
@@ -54,20 +49,35 @@ const postDish = (req, res) => {
 	});
 };
 
-// const postAllCategory = (req, res) => {
-// 	fs.readFile(path.resolve('build/asset-manifest.json'), (err, data) => {
-// 		if(err) res.send(err);
-// 		res.send('added');
-// 	});
-// }
-
 const deleteDish = (req, res) => {
-	Dish.remove({ _id: req.params.id }, err => {
+	const { id } = req.params;
+
+	Dish.findById(id, (err, dish) => {
 		if(err) {
 			res.send(err);
+			return;
 		}
-		res.json({message: 'successsfuly deleted'});
-	})
+		if(!dish['srcImage']) {
+			console.log('not found dishes');
+			return;
+		}
+		var arr = dish['srcImage'].split('/'),
+			publicId =  arr[arr.length - 1].split('.')[0];
+
+		cloudinary.v2.uploader.destroy(publicId, function(err) {
+			if(err) {
+				console.log(err);
+				return;
+			}
+			console.log('image removed from cloudinary');
+			Dish.remove({ _id: req.params.id }, err => {
+				if(err) {
+					console.log(err);
+				}
+				res.json({message: 'successsfuly deleted'});
+			})
+		});
+	});
 };
 
 const deleteAllDishes = (req, res) => {
