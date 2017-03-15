@@ -3,11 +3,13 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 
+import { appConf, dbConf } from './app.config';
+
 import { getCategories, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
 import { getDishesByCategory, getAllDishes, postDish, getDish, deleteDish, deleteAllDishes } from './app/routes/dishes';
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || appConf.port;
 
 const options = {
 	server: {socketOptions: {keepAlive: 1, connectTimeoutMS: 30000}},
@@ -15,7 +17,7 @@ const options = {
 };
 
 // mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/poket-cb-proto', options);
+mongoose.connect(`mongodb://${dbConf.host}/poket-cb-proto`, options);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

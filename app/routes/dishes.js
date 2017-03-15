@@ -1,11 +1,12 @@
 import Dish from '../models/dish';
 
 import cloudinary from 'cloudinary'
+import { cloudConf }from '../../app.config';
 
 cloudinary.config({
-	cloud_name: 'dkr4ewoys',
-	api_key: '883455887117763',
-	api_secret: 'NcskWG1bwFalgi6Zrn-_4CUZBDc'
+	cloud_name: cloudConf.name,
+	api_key: cloudConf.key,
+	api_secret: cloudConf.secret,
 });
 
 const getDishesByCategory = (req, res) => {
