@@ -3,8 +3,6 @@ import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Car
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router';
 
-import { dishFetchData } from '../../libs/helpers';
-
 const styles = {
 	card: {
 		width: '100%',
@@ -15,33 +13,24 @@ const styles = {
 	},
 };
 
-class SingleDish extends React.Component {
-	constructor() {
-		super();
-		this.state = {data: []};
-	}
-	componentDidMount() {
-		const { catId, dishId } = this.props.params;
-		const url = `http://localhost:8080/${catId}/dishes/${dishId}`;
-		dishFetchData(url).then(data => {
-			this.setState({data: data});
-		});
-	}
+class SingleDish extends React.PureComponent {
 	render() {
-		const { category, dishName, description, srcImage } = this.state.data;
-		const { catId } = this.props.params;
+		const { dishes } = this.props;
+		const { catId, dishId } = this.props.params;
+		const i = dishes.findIndex((dish) => dish._id === dishId);
+		const dish = dishes[i];
 		return (
 			<Card style={styles.card}>
 				<CardMedia
 					overlay={
-						<CardTitle title={dishName} subtitle={category}/>}
+						<CardTitle title={dish.dishName} subtitle={dish.category}/>}
 				>
 					<img
-						src={srcImage}
+						src={dish.srcImage}
 						alt=""/>
 				</CardMedia>
-				<CardTitle title={dishName} subtitle={category}/>
-				<CardText>{description}</CardText>
+				<CardTitle title={dish.dishName} subtitle={dish.category}/>
+				<CardText>{dish.description}</CardText>
 				<CardActions>
 					<Link to={`/${catId}/dishes`}>
 						<FlatButton label="Return"/>
