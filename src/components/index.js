@@ -1,6 +1,5 @@
 
 import App from './App';
-import Main from './Main';
 import Home from './app/Home';
 // app components
 import Category from './app/Category';
@@ -20,7 +19,6 @@ import ImageUpload from './admin/ImageUpload';
 
 export {
 	App,
-	Main,
 	Home,
 	Category,
 	Footer,

@@ -6,7 +6,6 @@ import cooking from '../img/cooking.svg';
 import './App.css';
 
 class App extends React.Component {
-
   render() {
     return (
       <div className="App">
@@ -14,7 +13,7 @@ class App extends React.Component {
           <Link to="admin"><img src={cooking} className="App-logo" alt="logo" /></Link>
           <Link to="/"><h2>Poket  COOKBOOK</h2></Link>
         </div>
-        {this.props.data.children}
+	      {React.cloneElement(this.props.children, { ...this.props, key: undefined, ref: undefined })}
         <Footer/>
       </div>
     );

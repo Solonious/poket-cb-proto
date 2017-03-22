@@ -2,8 +2,6 @@ import React from 'react';
 import { GridList } from 'material-ui/GridList';
 import { Link } from 'react-router';
 
-import { categoryFetchData } from '../../libs/helpers';
-
 import * as svgIcon from '../../img/index';
 
 const styles = {
@@ -31,33 +29,21 @@ const styles = {
 	}
 };
 
-class Home extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			data:[],
-		}
-	}
-	componentDidMount() {
-		categoryFetchData().then(data => {
-			this.setState({
-				data,
-			});
-		});
-	}
+class Home extends React.PureComponent {
 	render() {
+		const { categories } = this.props;
 		return (
 			<div style={styles.root}>
 				<GridList
 					cellHeight={'auto'}
 					style={styles.gridList}
 				>
-					 {this.state.data.map((tile) => (
+					 {categories.map((tile) => (
 						<Link
 							to={`/${tile.name}/dishes`}
 							className="btn-home"
 							style={styles.btn}
-							key={tile.id}
+							key={tile._id}
 						>
 							<img src={tile.src} style={styles.img} alt=""/>
 							<h3 style={styles.title}>{tile.name}</h3>

@@ -4,7 +4,6 @@ import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 import { Link } from 'react-router';
-import { dishesFetchData } from '../../libs/helpers';
 
 const styles = {
     root: {
@@ -19,33 +18,26 @@ const styles = {
     },
 };
 
-class Category extends React.Component {
-  constructor() {
-    super();
-    this.state = {data: []};
-  }
-	componentDidMount() {
-		const { catId } = this.props.params;
-		const url = `http://localhost:8080/${catId}/dishes/`;
-		dishesFetchData(url).then(data => {
-			this.setState({data: data});
-		});
-	}
+class Category extends React.PureComponent {
 	render() {
-  	const { catId } = this.props.params;
+		const { catId } = this.props.params;
+  	const { dishes } = this.props;
+  	const currentCategoryDishes = dishes.filter((dish)=>{
+  		return dish.category === catId;
+	  });
 		return (
       <div style={styles.root}>
         <GridList
           cellHeight={180}
           style={styles.gridList}
         >
-            {this.state.data.map((tile) => (
+            {currentCategoryDishes.map((tile) => (
                 <Link
-                    to={`/${catId}/dishes/${tile.id}`}
-                    key={tile.id}
+                    to={`/${catId}/${tile._id}`}
+                    key={tile._id}
                 >
                     <GridTile
-                        key={tile.id}
+                        key={tile._id}
                         title={tile.dishName}
                         actionIcon={<IconButton><StarBorder color="white"/></IconButton>}
                     >
