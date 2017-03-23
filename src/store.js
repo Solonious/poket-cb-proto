@@ -15,8 +15,8 @@ const configureStore = () => {
 	// The store is created with a reducer parameter and the saga middleware
 	const store = createStore(
 		rootReducer,
-		applyMiddleware(sagaMiddleware),
 		enchancers,
+		applyMiddleware(sagaMiddleware),
 	);
 	// rootSaga starts all the sagas in parallel
 	sagaMiddleware.run(rootSaga);

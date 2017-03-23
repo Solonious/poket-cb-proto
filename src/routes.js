@@ -24,7 +24,7 @@ const routes = (
         <Route path="/" component={App} >
           <IndexRoute component={Home} />
           <Route path="admin" component={AdminList}/>
-          <Route path="/admin/category"component={AdminCategoryContainer}/>
+          <Route path="/admin/category" component={AdminCategoryContainer}/>
           <Route path="addcat" component={AddCategoryContainer}/>
           <Route path="adddish" component={AddDishContainer}/>
           <Route path="/admin/dishes" component={AdminDishContainer}/>

@@ -5,6 +5,9 @@ import {
     DELETE_CATEGORY,
     DELETE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_FAILURE,
+    POST_CATEGORY,
+    POST_CATEGORY_SUCCESS,
+    POST_CATEGORY_FAILURE,
 } from '../constants/categories';
 
 function getCategories () {
@@ -46,6 +49,24 @@ function deleteCategoryFailure () {
     };
 }
 
+function postCategory () {
+    return {
+        type: POST_CATEGORY
+    };
+}
+
+function postCategorySuccess () {
+    return {
+        type: POST_CATEGORY_SUCCESS
+    };
+}
+
+function postCategoryFailure () {
+    return {
+        type: POST_CATEGORY_FAILURE
+    };
+}
+
 
 export {
     getCategories,
@@ -54,4 +75,7 @@ export {
     deleteCategory,
     deleteCategorySuccess,
     deleteCategoryFailure,
+    postCategory,
+    postCategorySuccess,
+    postCategoryFailure,
 };

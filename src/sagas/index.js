@@ -1,5 +1,5 @@
 // Import the watcher we have just created
-import { watchGetCategories, watchDeleteCategory } from './categories';
+import { watchGetCategories, watchDeleteCategory, watchPostCategory } from './categories';
 import { watchGetDishes, watchDeleteDish } from './dishes';
 
 export default function* rootSaga () {
@@ -7,6 +7,7 @@ export default function* rootSaga () {
     yield [
         watchGetCategories(),
         watchDeleteCategory(),
+        watchPostCategory(),
         watchGetDishes(),
         watchDeleteDish(),
     ];

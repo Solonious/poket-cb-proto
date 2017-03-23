@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "babel-polyfill": "^6.23.0",
-    "react-scripts": "0.9.3"
+    "react-scripts": "0.9.3",
+    "redux-form": "^6.5.0"
   },
   "dependencies": {
     "body-parser": "^1.17.0",
