@@ -1,20 +1,27 @@
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
-import { Category, Home, SingleDish, AdminList } from './components';
-import { AddCategoryContainer, AddDishContainer, AdminCategoryContainer, AdminDishContainer, MainContainer } from './containers';
+import { Category, Home, SingleDish, AdminList, App } from './components';
+import { AddCategoryContainer, AddDishContainer, AdminCategoryContainer, AdminDishContainer } from './containers';
 import { Provider } from 'react-redux';
-import store, { history } from './store';
+import configureStore from './store';
+
+
+import { syncHistoryWithStore } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-//
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
+
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
 const routes = (
 <MuiThemeProvider>
 	<Provider store={store}>
     <Router history={history}>
-        <Route path="/" component={MainContainer} >
+        <Route path="/" component={App} >
           <IndexRoute component={Home} />
           <Route path="admin" component={AdminList}/>
           <Route path="/admin/category"component={AdminCategoryContainer}/>

@@ -18,40 +18,35 @@ const styles = {
 };
 
 class AdminCategoryContainer extends React.Component{
-	constructor() {
-		super();
-		this.state = {
-			categories:[],
-		};
-		this.getCategory = this.getCategory.bind(this)
-		this.deleteCategory = this.deleteCategory.bind(this)
-	}
-	componentDidMount() {
-		this.getCategory()
-	}
-	getCategory() {
-		categoryFetchData().then(categories => {
-			this.setState({
-				categories,
-			});
-		});
-	}
-	deleteCategory(id) {
-		fetch(`http://localhost:8080/category/${id}`, {
-			headers: new Headers({
-				'Content-Type': 'application/json',
-			}),
-			method: 'DELETE',
-		})
-			.then(response => response.json())
-			.then(response => {
-				this.setState({ categories: this.state.categories.filter(category => category._id !== id) });
-				console.log(response.message);
-				this.getCategory();
-			});
-	}
+	// constructor() {
+	// 	super();
+	// 	this.getCategory = this.getCategory.bind(this)
+	// 	this.deleteCategory = this.deleteCategory.bind(this)
+	// }
+	// getCategory() {
+	// 	categoryFetchData().then(categories => {
+	// 		this.setState({
+	// 			categories,
+	// 		});
+	// 	});
+	// }
+	// deleteCategory(id) {
+	// 	fetch(`http://localhost:8080/category/${id}`, {
+	// 		headers: new Headers({
+	// 			'Content-Type': 'application/json',
+	// 		}),
+	// 		method: 'DELETE',
+	// 	})
+	// 		.then(response => response.json())
+	// 		.then(response => {
+	// 			this.setState({ categories: this.state.categories.filter(category => category._id !== id) });
+	// 			console.log(response.message);
+	// 			this.getCategory();
+	// 		});
+	// }
 	render() {
-		const { categories } = this.state;
+		const { categories } = this.props;
+		// const { categories } = this.state;
 		return (
 			<div>
 				<Card style={styles.card}>

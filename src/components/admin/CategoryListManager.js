@@ -18,7 +18,7 @@ class CategoryListManager extends React.PureComponent {
 			<List style={styles.list}>
 				{categories.map((data) => (
 						<CategoryItemListAdmin
-							key={data.id}
+							key={data._id}
 							{...data}
 						  deleteCategory={deleteCategory}
 						/>
