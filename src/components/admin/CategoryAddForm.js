@@ -18,6 +18,7 @@ const styles = {
 
 class CategoryAddForm extends React.PureComponent{
 	render() {
+		console.log(this.props);
 		const { handleSubmit, handleChangeName, handleChangeSrc, data } = this.props;
 		return (
 			<form onSubmit={()=>{handleSubmit()}}>

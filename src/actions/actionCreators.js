@@ -1,11 +1,11 @@
-import * as types from '../constants/actionTypes';
 
-export const selectedCategoryAction = (category) => ({
-	type: types.SELECTED_CATEGORY,
-	category
+export const addCategoryAction = (name, src) => ({
+	type: 'ADD_CATEGORY',
+	name,
+	src
 });
 
-export const selectedDishAction = (dish) => ({
-	type: types.SELECTED_DISH,
-	dish
+export const deleteCategoryAction = (id) => ({
+	type: 'DELETE_CATEGORY',
+	id
 });

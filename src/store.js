@@ -1,28 +1,29 @@
-import {createStore, compose} from 'redux';
-import {syncHistoryWithStore} from 'react-router-redux';
-import {browserHistory} from 'react-router';
+import { createStore, compose, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-import { categories, dishes } from './data/index';
+import rootSaga from './sagas';
+import rootReducer from './reducers';
+
+// import { categories, dishes } from './data/index';
+
+const configureStore = () => {
+	const sagaMiddleware = createSagaMiddleware();
+	const enchancers = compose(
+		window.devToolsExtension ? window.devToolsExtension() : f => f
+	);
+
+	// The store is created with a reducer parameter and the saga middleware
+	const store = createStore(
+		rootReducer,
+		applyMiddleware(sagaMiddleware),
+		enchancers,
+	);
+	// rootSaga starts all the sagas in parallel
+	sagaMiddleware.run(rootSaga);
+
+	return store; // Return the state
+}
+export default configureStore;
 
 
-// const categoriesData = [];
-// const dishesData = [];
 
-//import reducer
-import rootReducer from './reducers/index';
-
-//create an object data
-const defaultState = {
-	categories,
-	dishes,
-};
-
-const enchancers = compose(
-	window.devToolsExtension ? window.devToolsExtension() : f => f
-);
-
-const store = createStore(rootReducer, defaultState, enchancers);
-
-export const history = syncHistoryWithStore(browserHistory, store);
-
-export default store;
