@@ -7,6 +7,10 @@ import {
     DELETE_DISH,
     DELETE_DISH_SUCCESS,
     DELETE_DISH_FAILURE,
+	//post dish
+	POST_DISH,
+	POST_DISH_SUCCESS,
+	POST_DISH_FAILURE,
 } from '../constants/dishes';
 
 function getDishes () {
@@ -48,6 +52,24 @@ function deleteDishFailure () {
     };
 }
 
+function postDish () {
+	return {
+		type: POST_DISH
+	}
+}
+
+function postDishSuccess () {
+	return {
+		type: POST_DISH_SUCCESS
+	}
+}
+
+function postDishFailure () {
+	return {
+		type: POST_DISH_FAILURE
+	}
+}
+
 export {
 	getDishes,
 	getDishesSuccess,
@@ -55,4 +77,7 @@ export {
 	deleteDish,
 	deleteDishSuccess,
 	deleteDishFailure,
+	postDish,
+	postDishSuccess,
+	postDishFailure,
 };

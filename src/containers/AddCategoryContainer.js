@@ -11,7 +11,7 @@ class AddCategoryContainer extends React.Component {
 		super(props);
 		this.submit = this.submit.bind(this)
 	}
-	
+
 	submit(event) {
 		event.preventDefault();
 		this.props.categoriesActions.postCategory();

@@ -1,16 +1,28 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import { Field, reduxForm } from 'redux-form';
+
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+	<SelectField
+		floatingLabelText={label}
+		errorText={touched && error}
+        {...input}
+		onChange={(event, index, value) => input.onChange(value)}
+		children={children}
+        {...custom}/>
+);
 
 class SelectFieldCustom extends React.PureComponent {
 	render() {
+		console.log(this.props);
 		const { items, handleChangeCategory, value } = this.props;
 		return (
 			<div>
-				<SelectField
-					value={value}
-					floatingLabelText="Frequency"
-					onChange={handleChangeCategory}
+				<Field
+					name="category"
+					component={renderSelectField}
+					label="Category"
 				>
 					{items.map((item, i) => (
 						<MenuItem
@@ -18,7 +30,7 @@ class SelectFieldCustom extends React.PureComponent {
 							value={i}
 							primaryText={item} />
 					))}
-				</SelectField>
+				</Field>
 				<br />
 			</div>
 		)

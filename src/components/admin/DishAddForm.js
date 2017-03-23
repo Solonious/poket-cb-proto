@@ -3,6 +3,8 @@ import { Card } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import { Field, reduxForm } from 'redux-form/immutable';
+
 import { SelectFieldCustom, ImageUpload } from '../../components';
 
 const styles = {
@@ -18,41 +20,40 @@ const styles = {
     }
 };
 
+const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+    <TextField floatingLabelText={label}
+               errorText={touched && error}
+               {...input}
+               {...custom}
+    />
+);
+
 class DishAddForm extends React.PureComponent{
     render() {
-        const {
-            handleSubmit,
-            handleChangeName,
-            handleChangeCategory,
-            handleChangeDescription,
-            data,
-            onImageDrop,
-        } = this.props;
+        const { handleSubmit, categories } = this.props;
 
         return (
-            <form onSubmit={()=> {handleSubmit()}}>
+            <form onSubmit={handleSubmit()}>
                 <Card style={styles.card}>
                     <h3>Add Dish</h3>
-                    <ImageUpload
-                        data={data}
-                        onImageDrop={onImageDrop}/>
-                    <TextField
-                        value={data.name}
-                        floatingLabelText="Dish Name"
-                        onChange={handleChangeName}
-                    /><br />
+                    {/*<ImageUpload*/}
+                        {/*data={data}*/}
+                        {/*onImageDrop={onImageDrop}/>*/}
+                    <Field
+                        name="name"
+                        component={renderTextField}
+                        label="Dish name"
+                    />
                     <SelectFieldCustom
-                      items={data.categories}
-                      value={data.category.index}
-                      handleChangeCategory={handleChangeCategory}
+                        categories={categories}
                     />
                     <br />
-                    <TextField
-                        value={data.description}
-                        floatingLabelText="Description"
+                    <Field
+                        name="Description"
+                        component={renderTextField}
+                        label="Description"
                         multiLine={true}
                         rows={2}
-                        onChange={handleChangeDescription}
                     /><br />
                     <RaisedButton label="Add" type="submit" secondary={true} style={styles.btn} />
                 </Card>
@@ -61,4 +62,6 @@ class DishAddForm extends React.PureComponent{
     }
 }
 
-export default DishAddForm;
+export default reduxForm({
+    form: 'dishForm'
+})(DishAddForm);
