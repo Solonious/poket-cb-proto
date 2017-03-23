@@ -11,15 +11,19 @@ import cooking from '../img/cooking.svg';
 import './App.css';
 
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.deleteCategory = this.deleteCategory.bind(this);
+  }
   componentDidMount() {
     this.getCategories();
     this.getDishes();
   }
   getCategories() {
     this.props.categoriesActions.getCategories();
+  }
+  deleteCategory() {
+      this.props.categoriesActions.deleteCategory()
   }
   getDishes() {
     this.props.dishesActions.getDishes();

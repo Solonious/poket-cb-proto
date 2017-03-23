@@ -21,14 +21,16 @@ const styles = {
 
 class CategoryItemListAdmin extends React.PureComponent {
 	render() {
-		const { id, name, deleteCategory } = this.props;
+		const { _id, name, deleteCategory } = this.props;
 		return (
 				<li className="Admin-item-list" style={styles.root}>
 					{`${name}`}
 					<button
 						className="Delete-btn"
 						style={styles.btn}
-						onClick={() => deleteCategory(id)}
+						onClick={() => {
+							deleteCategory(_id)
+                        }}
 					>
 						&times;
 					</button>

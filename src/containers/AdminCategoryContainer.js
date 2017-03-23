@@ -45,14 +45,14 @@ class AdminCategoryContainer extends React.Component{
 	// }
 	render() {
 		const { categories } = this.props;
-		// const { categories } = this.state;
+		const { deleteCategory } = this.props.categoriesActions;
 		return (
 			<div>
 				<Card style={styles.card}>
 					<Link to="admin"><h3>Adminka</h3></Link>
 									<CategoryListManager
 										categories={categories}
-									  deleteCategory={this.deleteCategory}
+									  deleteCategory={deleteCategory}
 									/>
 				</Card>
 				<Link to="addcat">
