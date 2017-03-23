@@ -18,7 +18,6 @@ const fetchCategories = () => {
 };
 
 const deleteServerCategory = (id) => {
-    console.log(id);
     return fetch(`http://localhost:8080/category/${id}`, {
 			headers: new Headers({
 				'Content-Type': 'application/json',

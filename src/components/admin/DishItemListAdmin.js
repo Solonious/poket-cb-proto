@@ -21,14 +21,14 @@ const styles = {
 
 class DishItemListAdmin extends React.PureComponent {
     render() {
-        const { _id, dishName, category, deleteDish } = this.props;
+        const { _id, dishName, deleteDish } = this.props;
         return (
             <li className="Admin-item-list" style={styles.root}>
                 {`${dishName}`}
                 <button
                     className="Delete-btn"
                     style={styles.btn}
-                    onClick={() => deleteDish(_id, category)}
+                    onClick={() => deleteDish(_id)}
                 >
                     &times;
                 </button>

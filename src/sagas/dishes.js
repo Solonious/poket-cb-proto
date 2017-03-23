@@ -1,8 +1,12 @@
 import 'babel-polyfill';
 import { takeLatest } from 'redux-saga/effects';
-import { put, call } from 'redux-saga/effects';
-import { GET_DISHES } from '../constants/dishes';
-import { getDishesSuccess, getDishesFailure } from '../actions/dishes';
+import { put, call, select } from 'redux-saga/effects';
+import { GET_DISHES, DELETE_DISH } from '../constants/dishes';
+import { getDishesSuccess, getDishesFailure, deleteDishSuccess, deleteDishFailure } from '../actions/dishes';
+
+const selectedDish = (state) => {
+    return state.getIn(['dishes', 'list']).toJS();
+};
 
 const fetchDishes = () => {
 	return fetch('http://localhost:8080/dishes', {
@@ -11,6 +15,19 @@ const fetchDishes = () => {
 		})
 	})
 		.then(response => response.json())
+};
+
+const deleteServerDish = (id) => {
+    return fetch(`http://localhost:8080/dishes/${id}`, {
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        }),
+        method: 'DELETE',
+    })
+        .then(response => response.json())
+        .then(response => {
+            console.log(response.message);
+        });
 };
 
 function* getDishes () {
@@ -22,10 +39,27 @@ function* getDishes () {
 	}
 }
 
+function* deleteDish (action) {
+    const { id } = action;
+
+    const dishes = yield select(selectedDish);
+    try {
+        yield call(deleteServerDish, id);
+        yield put(deleteDishSuccess(dishes.filter(dish => dish._id !== id)));
+    } catch (err) {
+        yield put(deleteDishFailure());
+    }
+}
+
 function* watchGetDishes () {
 	yield takeLatest(GET_DISHES, getDishes);
 }
 
+function* watchDeleteDish () {
+    yield takeLatest(DELETE_DISH, deleteDish);
+}
+
 export {
-	watchGetDishes
+	watchGetDishes,
+	watchDeleteDish,
 };

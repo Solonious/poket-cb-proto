@@ -14,6 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.deleteCategory = this.deleteCategory.bind(this);
+    this.deleteDish = this.deleteDish.bind(this);
   }
   componentDidMount() {
     this.getCategories();
@@ -27,6 +28,9 @@ class App extends React.Component {
   }
   getDishes() {
     this.props.dishesActions.getDishes();
+  }
+  deleteDish() {
+      this.props.dishesActions.deleteDish();
   }
   render() {
     return (
@@ -42,19 +46,18 @@ class App extends React.Component {
   }
 }
 
-// We can read values from the state thanks to mapStateToProps
 function mapStateToProps (state) {
-	return { // We get all the games to list in the page
+	return {
 		categories: state.getIn(['categories', 'list'], Immutable.List()).toJS(),
 		dishes: state.getIn(['dishes', 'list'], Immutable.List()).toJS(),
 	}
 }
-// We can dispatch actions to the reducer and sagas
+
 function mapDispatchToProps (dispatch) {
 	return {
 		categoriesActions: bindActionCreators(categoriesActionCreators, dispatch),
 		dishesActions: bindActionCreators(dishesActionCreators, dispatch),
 	};
 }
-// Finally we export the connected GamesContainer
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
