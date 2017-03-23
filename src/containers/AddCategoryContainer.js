@@ -1,8 +1,6 @@
 import React from 'react';
 import { CategoryAddForm } from '../components';
 
-import { hashHistory } from 'react-router';
-
 class AddCategoryContainer extends React.Component {
 	// constructor(props) {
 	// 	super(props);

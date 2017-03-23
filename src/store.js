@@ -22,7 +22,7 @@ const configureStore = () => {
 	sagaMiddleware.run(rootSaga);
 
 	return store; // Return the state
-}
+};
 export default configureStore;
 
 

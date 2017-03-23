@@ -50,7 +50,7 @@ app.route('/:catId/dishes')
 	.get(getDishesByCategory)
 	.post(postDish)
 	.delete(deleteAllDishes);
-/// adminka
+// adminka
 app.route('/dishes/:id')
 	.get(getDish)
 	.delete(deleteDish);

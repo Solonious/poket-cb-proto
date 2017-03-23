@@ -1,10 +1,11 @@
-import { takeLatest } from 'redux-saga';
+import 'babel-polyfill';
+import { takeLatest } from 'redux-saga/effects';
 import { put, call } from 'redux-saga/effects';
-import { GET_DISHES } from '../constants/categories';
-import { getCategoriesSuccess, getCategoriesFailure } from '../actions/categories';
+import { GET_DISHES } from '../constants/dishes';
+import { getDishesSuccess, getDishesFailure } from '../actions/dishes';
 
-const fetchCategories = () => {
-	return fetch('http://localhost:8080/category', {
+const fetchDishes = () => {
+	return fetch('http://localhost:8080/dishes', {
 		headers: new Headers({
 			'Content-Type': 'application/json'
 		})
@@ -12,19 +13,19 @@ const fetchCategories = () => {
 		.then(response => response.json())
 };
 
-function* getCategories () {
+function* getDishes () {
 	try {
-		const categories = yield call(fetchCategories);
-		yield put(getCategoriesSuccess(categories));
+		const dishes = yield call(fetchDishes);
+		yield put(getDishesSuccess(dishes));
 	} catch (err) {
-		yield put(getCategoriesFailure());
+		yield put(getDishesFailure());
 	}
 }
 
-function* watchGetCategories () {
-	yield takeLatest(GET_CATEGORIES, getCategories);
+function* watchGetDishes () {
+	yield takeLatest(GET_DISHES, getDishes);
 }
 
 export {
-	watchGetCategories
+	watchGetDishes
 };

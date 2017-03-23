@@ -11,9 +11,9 @@ import cooking from '../img/cooking.svg';
 import './App.css';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   componentDidMount() {
     this.getCategories();
     this.getDishes();

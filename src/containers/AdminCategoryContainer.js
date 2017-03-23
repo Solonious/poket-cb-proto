@@ -4,7 +4,6 @@ import { Card } from 'material-ui/Card';
 import { CategoryListManager } from '../components';
 
 import { Link } from 'react-router';
-import { categoryFetchData } from '../libs/helpers';
 
 const styles = {
 	card: {

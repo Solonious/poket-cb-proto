@@ -2,7 +2,7 @@ import {
 	GET_DISHES,
 	GET_DISHES_SUCCESS,
 	GET_DISHES_FAILURE
-} from '../constants/Dishes';
+} from '../constants/dishes';
 
 function getDishes () {
 	return {
