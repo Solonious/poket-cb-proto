@@ -39,10 +39,10 @@ function deleteDish (id) {
     };
 }
 
-function deleteDishSuccess (categories) {
+function deleteDishSuccess (dishes) {
     return {
         type: DELETE_DISH_SUCCESS,
-        categories
+        dishes
     };
 }
 

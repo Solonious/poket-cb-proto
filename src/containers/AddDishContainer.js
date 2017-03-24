@@ -135,7 +135,7 @@ class AddDishContainer extends React.Component {
     submit(event) {
         event.preventDefault();
         this.props.dishesActions.postDish();
-        // this.props.dishesActions.getDishes();
+        this.props.dishesActions.getDishes();
         hashHistory.push('/admin/dishes');
     }
 

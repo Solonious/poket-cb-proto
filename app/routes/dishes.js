@@ -50,35 +50,44 @@ const postDish = (req, res) => {
 	});
 };
 
+// const deleteDish = (req, res) => {
+// 	const { id } = req.params;
+//
+// 	Dish.findById(id, (err, dish) => {
+// 		if(err) {
+// 			res.send(err);
+// 			return;
+// 		}
+// 		if(!dish['srcImage']) {
+// 			console.log('not found dishes');
+// 			return;
+// 		}
+// 		var arr = dish['srcImage'].split('/'),
+// 			publicId =  arr[arr.length - 1].split('.')[0];
+//
+// 		cloudinary.v2.uploader.destroy(publicId, function(err) {
+// 			if(err) {
+// 				console.log(err);
+// 				return;
+// 			}
+// 			console.log('image removed from cloudinary');
+// 			Dish.remove({ _id: req.params.id }, err => {
+// 				if(err) {
+// 					console.log(err);
+// 				}
+// 				res.json({message: 'successsfuly deleted'});
+// 			})
+// 		});
+// 	});
+// };
+
 const deleteDish = (req, res) => {
-	const { id } = req.params;
-
-	Dish.findById(id, (err, dish) => {
-		if(err) {
-			res.send(err);
-			return;
-		}
-		if(!dish['srcImage']) {
-			console.log('not found dishes');
-			return;
-		}
-		var arr = dish['srcImage'].split('/'),
-			publicId =  arr[arr.length - 1].split('.')[0];
-
-		cloudinary.v2.uploader.destroy(publicId, function(err) {
-			if(err) {
-				console.log(err);
-				return;
-			}
-			console.log('image removed from cloudinary');
-			Dish.remove({ _id: req.params.id }, err => {
-				if(err) {
-					console.log(err);
-				}
-				res.json({message: 'successsfuly deleted'});
-			})
-		});
-	});
+    Dish.remove({ _id: req.params.id }, err => {
+        if(err) {
+            res.send(err);
+        }
+        res.json({message: 'successsfuly deleted'});
+    })
 };
 
 const deleteAllDishes = (req, res) => {

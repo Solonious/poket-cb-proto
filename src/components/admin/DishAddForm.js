@@ -35,12 +35,11 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
     onChange={(event, index, value) => input.onChange(value)}
     children={children}
 		{...custom}/>
-)
+);
 
 class DishAddForm extends React.PureComponent{
     render() {
         const { handleSubmit, categories } = this.props;
-
         return (
             <form onSubmit={handleSubmit}>
                 <Card style={styles.card}>
@@ -48,8 +47,14 @@ class DishAddForm extends React.PureComponent{
                     {/*<ImageUpload*/}
                         {/*data={data}*/}
                         {/*onImageDrop={onImageDrop}/>*/}
+
                     <Field
-                        name="name"
+                        name="srcImage"
+                        component={renderTextField}
+                        label="Image"
+                    />
+                    <Field
+                        name="dishName"
                         component={renderTextField}
                         label="Dish name"
                     />
@@ -67,7 +72,7 @@ class DishAddForm extends React.PureComponent{
                     </Field>
                     <br />
                     <Field
-                        name="Description"
+                        name="description"
                         component={renderTextField}
                         label="Description"
                         multiLine={true}

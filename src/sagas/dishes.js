@@ -15,6 +15,8 @@ const selectedDish = (state) => {
     return state.getIn(['dishes', 'list']).toJS();
 };
 
+//TODO selectedPicture
+
 const fetchDishes = () => {
 	return fetch('http://localhost:8080/dishes', {
 		headers: new Headers({
