@@ -15,7 +15,9 @@ const selectedDish = (state) => {
     return state.getIn(['dishes', 'list']).toJS();
 };
 
-//TODO selectedPicture
+const selectedPicture = (state) => {
+    return state.getIn(['filestack', 'url'], '');
+};
 
 const fetchDishes = () => {
 	return fetch('http://localhost:8080/dishes', {
@@ -76,9 +78,10 @@ const getDishForm = (state) => {
 };
 
 function* postDish () {
+    const picture = yield select(selectedPicture);
 	const dish = yield select(getDishForm);
 
-	const newDish = Object.assign({}, dish.values);
+	const newDish = Object.assign({}, { picture }, dish.values);
 	try {
 		yield call(postServerDish, newDish);
 		yield put(postDishSuccess());

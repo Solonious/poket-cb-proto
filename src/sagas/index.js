@@ -1,6 +1,7 @@
 // Import the watcher we have just created
 import { watchGetCategories, watchDeleteCategory, watchPostCategory } from './categories';
 import { watchGetDishes, watchDeleteDish, watchPostDish } from './dishes';
+import { watchUploadPicture } from './filestack';
 
 export default function* rootSaga () {
 // We start all the sagas in parallel
@@ -11,5 +12,6 @@ export default function* rootSaga () {
         watchGetDishes(),
         watchDeleteDish(),
         watchPostDish(),
+        watchUploadPicture(),
     ];
 }

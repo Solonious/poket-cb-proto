@@ -6,6 +6,7 @@ import './ImageUpload.css';
 class ImageUpload extends React.PureComponent {
 
 	render() {
+		console.log(this.props);
 		const { onImageDrop, data } = this.props;
 		return (
 			<div>

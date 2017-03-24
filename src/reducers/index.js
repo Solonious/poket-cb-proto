@@ -4,11 +4,13 @@ import { routerReducer } from 'react-router-redux';
 
 import dishes from './dishes';
 import categories from './categories';
+import filestack from './filestack';
 
 const rootReducer = combineReducers({
 	dishes,
 	categories,
 	form,
+	filestack,
 	routing: routerReducer,
 });
 

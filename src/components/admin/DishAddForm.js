@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import { Field, reduxForm } from 'redux-form/immutable';
 
 const styles = {
@@ -16,6 +17,10 @@ const styles = {
     },
     btn: {
         marginTop: 50
+    },
+    picture: {
+        width: '100%',
+        heigth: 'auto',
     }
 };
 
@@ -39,20 +44,23 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
 
 class DishAddForm extends React.PureComponent{
     render() {
-        const { handleSubmit, categories } = this.props;
+        const { handleSubmit, categories, uploadPicture, picture } = this.props;
+        console.log(picture);
         return (
             <form onSubmit={handleSubmit}>
                 <Card style={styles.card}>
                     <h3>Add Dish</h3>
-                    {/*<ImageUpload*/}
-                        {/*data={data}*/}
-                        {/*onImageDrop={onImageDrop}/>*/}
-
-                    <Field
-                        name="srcImage"
-                        component={renderTextField}
-                        label="Image"
-                    />
+                    <RaisedButton
+                        secondary={true}
+                        style={styles.btn}
+                        label="Upload"
+                        labelPosition="before"
+                        icon={<KeyboardArrowDown/>}
+                        onClick={()=> uploadPicture()}
+                    /><br/>
+                    <div className="form-group text-center">
+                        <img style={styles.picture} id="picture" className="img-responsive img-upload" src={picture} />
+                    </div>
                     <Field
                         name="dishName"
                         component={renderTextField}
