@@ -10,8 +10,8 @@ const rootReducer = combineReducers({
 	dishes,
 	categories,
 	form,
-	filestack,
 	routing: routerReducer,
+	filestack,
 });
 
 export default rootReducer;

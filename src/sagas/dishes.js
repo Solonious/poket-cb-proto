@@ -42,6 +42,7 @@ const deleteServerDish = (id) => {
 };
 
 const postServerDish = (dish) => {
+	console.log(dish);
 	return fetch('http://localhost:8080/dishes', {
 		headers: new Headers({
 			'Content-Type': 'application/json'

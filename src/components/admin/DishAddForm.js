@@ -20,7 +20,8 @@ const styles = {
     },
     picture: {
         width: '100%',
-        heigth: 'auto',
+        height: 300,
+        border: '1px solid',
     }
 };
 

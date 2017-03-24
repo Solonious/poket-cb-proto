@@ -56,10 +56,12 @@ class AddDishContainer extends React.Component {
     }
 
     render() {
-        const { categories } = this.props;
+	    console.log(this.props);
+        const { categories, picture } = this.props;
         return (
             <DishAddForm
                 categories={categories}
+                picture={picture}
                 handleSubmit={this.submit}
                 uploadPicture={this.uploadPicture}
             />
