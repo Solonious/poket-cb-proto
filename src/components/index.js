@@ -14,7 +14,6 @@ import CategoryListManager from './admin/CategoryListManager';
 import DishAddForm from './admin/DishAddForm';
 import DishListManager from './admin/DishListManager';
 import DishItemListAdmin from './admin/DishItemListAdmin';
-import SelectFieldCustom from './admin/SelectFieldCustom';
 import ImageUpload from './admin/ImageUpload';
 
 export {
@@ -30,6 +29,5 @@ export {
 	DishAddForm,
 	DishListManager,
 	DishItemListAdmin,
-	SelectFieldCustom,
 	ImageUpload,
 };

@@ -2,10 +2,9 @@ import React from 'react';
 import { Card } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import { Field, reduxForm } from 'redux-form/immutable';
-
-import { SelectFieldCustom, ImageUpload } from '../../components';
 
 const styles = {
     card: {
@@ -28,12 +27,22 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
     />
 );
 
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+  <SelectField
+    floatingLabelText={label}
+    errorText={touched && error}
+		{...input}
+    onChange={(event, index, value) => input.onChange(value)}
+    children={children}
+		{...custom}/>
+)
+
 class DishAddForm extends React.PureComponent{
     render() {
         const { handleSubmit, categories } = this.props;
 
         return (
-            <form onSubmit={handleSubmit()}>
+            <form onSubmit={handleSubmit}>
                 <Card style={styles.card}>
                     <h3>Add Dish</h3>
                     {/*<ImageUpload*/}
@@ -44,9 +53,18 @@ class DishAddForm extends React.PureComponent{
                         component={renderTextField}
                         label="Dish name"
                     />
-                    <SelectFieldCustom
-                        categories={categories}
-                    />
+                    <Field
+                      name="category"
+                      component={renderSelectField}
+                      label="Category"
+                    >
+			                {categories.map((item, i) => (
+                        <MenuItem
+                          key={i}
+                          value={item.name}
+                          primaryText={item.name} />
+			                ))}
+                    </Field>
                     <br />
                     <Field
                         name="Description"

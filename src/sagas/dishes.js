@@ -1,8 +1,15 @@
 import 'babel-polyfill';
 import { takeLatest } from 'redux-saga/effects';
 import { put, call, select } from 'redux-saga/effects';
-import { GET_DISHES, DELETE_DISH } from '../constants/dishes';
-import { getDishesSuccess, getDishesFailure, deleteDishSuccess, deleteDishFailure } from '../actions/dishes';
+import { GET_DISHES, DELETE_DISH, POST_DISH } from '../constants/dishes';
+import {
+	getDishesSuccess,
+	getDishesFailure,
+	deleteDishSuccess,
+	deleteDishFailure,
+	postDishSuccess,
+	postDishFailure,
+} from '../actions/dishes';
 
 const selectedDish = (state) => {
     return state.getIn(['dishes', 'list']).toJS();
@@ -30,6 +37,17 @@ const deleteServerDish = (id) => {
         });
 };
 
+const postServerDish = (dish) => {
+	return fetch('http://localhost:8080/dishes', {
+		headers: new Headers({
+			'Content-Type': 'application/json'
+		}),
+		method: 'POST',
+		body: JSON.stringify(dish)
+	})
+		.then(res => res.json());
+};
+
 function* getDishes () {
 	try {
 		const dishes = yield call(fetchDishes);
@@ -51,6 +69,22 @@ function* deleteDish (action) {
     }
 }
 
+const getDishForm = (state) => {
+	return state.getIn(['form', 'dishForm']).toJS();
+};
+
+function* postDish () {
+	const dish = yield select(getDishForm);
+
+	const newDish = Object.assign({}, dish.values);
+	try {
+		yield call(postServerDish, newDish);
+		yield put(postDishSuccess());
+	} catch (err) {
+		yield put(postDishFailure());
+	}
+}
+
 function* watchGetDishes () {
 	yield takeLatest(GET_DISHES, getDishes);
 }
@@ -59,7 +93,12 @@ function* watchDeleteDish () {
     yield takeLatest(DELETE_DISH, deleteDish);
 }
 
+function* watchPostDish () {
+	yield takeLatest(POST_DISH, postDish);
+}
+
 export {
 	watchGetDishes,
 	watchDeleteDish,
+	watchPostDish,
 };

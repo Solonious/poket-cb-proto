@@ -34,7 +34,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        gamesActions: bindActionCreators(categoriesActionCreators, dispatch),
+        categoriesActions: bindActionCreators(categoriesActionCreators, dispatch),
     };
 }
 

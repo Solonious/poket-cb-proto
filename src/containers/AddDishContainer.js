@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { DishAddForm } from '../components';
 import { hashHistory } from 'react-router';
 
-import { categoryFetchData } from '../libs/helpers';
+import * as dishesActionCreators from '../actions/dishes';
+
 import request from 'superagent';
 
 const CLOUDINARY_UPLOAD_PRESET = 'jfdnt3qv';
@@ -10,6 +13,10 @@ const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/pocket-cb-proto/u
 
 
 class AddDishContainer extends React.Component {
+	constructor(props) {
+		super(props);
+		this.submit = this.submit.bind(this)
+	}
     // constructor(props) {
     //     super(props);
     //     this.state = {
@@ -127,9 +134,9 @@ class AddDishContainer extends React.Component {
     // }
     submit(event) {
         event.preventDefault();
-        this.props.categoriesActions.postDish();
-        this.props.categoriesActions.getDishes();
-        hashHistory.push('/admin/category');
+        this.props.dishesActions.postDish();
+        // this.props.dishesActions.getDishes();
+        hashHistory.push('/admin/dishes');
     }
 
     render() {
@@ -143,4 +150,14 @@ class AddDishContainer extends React.Component {
     }
 }
 
-export default AddDishContainer;
+function mapStateToProps (state) {
+	return {...state};
+}
+
+function mapDispatchToProps (dispatch) {
+	return {
+		dishesActions: bindActionCreators(dishesActionCreators, dispatch),
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddDishContainer);
