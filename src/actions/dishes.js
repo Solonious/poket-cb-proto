@@ -34,8 +34,8 @@ function getDishesFailure () {
 
 function deleteDish (id) {
     return {
-        type: DELETE_DISH,
-        id,
+	    type: DELETE_DISH,
+	    id,
     };
 }
 

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import Immutable from 'immutable';
 import * as categoriesActionCreators from '../actions/categories';
 import * as dishesActionCreators from '../actions/dishes';
+import * as filestackActionCreators from '../actions/filestack';
 import Footer from './app/Footer';
 import { Link } from 'react-router';
 
@@ -15,6 +16,7 @@ class App extends React.Component {
     super(props);
     this.deleteCategory = this.deleteCategory.bind(this);
     this.deleteDish = this.deleteDish.bind(this);
+    this.removePicture = this.removePicture.bind(this);
   }
   componentDidMount() {
     this.getCategories();
@@ -31,6 +33,9 @@ class App extends React.Component {
   }
   deleteDish() {
       this.props.dishesActions.deleteDish();
+  }
+  removePicture() {
+  	this.props.filestackActions.removePicture();
   }
   render() {
     return (
@@ -57,6 +62,7 @@ function mapDispatchToProps (dispatch) {
 	return {
 		categoriesActions: bindActionCreators(categoriesActionCreators, dispatch),
 		dishesActions: bindActionCreators(dishesActionCreators, dispatch),
+		filestackActions: bindActionCreators(filestackActionCreators, dispatch),
 	};
 }
 

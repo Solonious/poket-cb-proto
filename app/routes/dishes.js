@@ -1,14 +1,5 @@
 import Dish from '../models/dish';
 
-import cloudinary from 'cloudinary'
-import { cloudConf }from '../../app.config';
-
-cloudinary.config({
-	cloud_name: cloudConf.name,
-	api_key: cloudConf.key,
-	api_secret: cloudConf.secret,
-});
-
 const getDishesByCategory = (req, res) => {
 	const { catId } = req.params;
 	Dish.find({category: catId}, (err, dish) => {
@@ -50,38 +41,9 @@ const postDish = (req, res) => {
 	});
 };
 
-// const deleteDish = (req, res) => {
-// 	const { id } = req.params;
-//
-// 	Dish.findById(id, (err, dish) => {
-// 		if(err) {
-// 			res.send(err);
-// 			return;
-// 		}
-// 		if(!dish['srcImage']) {
-// 			console.log('not found dishes');
-// 			return;
-// 		}
-// 		var arr = dish['srcImage'].split('/'),
-// 			publicId =  arr[arr.length - 1].split('.')[0];
-//
-// 		cloudinary.v2.uploader.destroy(publicId, function(err) {
-// 			if(err) {
-// 				console.log(err);
-// 				return;
-// 			}
-// 			console.log('image removed from cloudinary');
-// 			Dish.remove({ _id: req.params.id }, err => {
-// 				if(err) {
-// 					console.log(err);
-// 				}
-// 				res.json({message: 'successsfuly deleted'});
-// 			})
-// 		});
-// 	});
-// };
-
 const deleteDish = (req, res) => {
+	const { srcImage } = req.params;
+	console.log(req.params);
     Dish.remove({ _id: req.params.id }, err => {
         if(err) {
             res.send(err);

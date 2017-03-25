@@ -1,11 +1,12 @@
-// Import constants (obviously)
 import {
-    UPLOAD_PICTURE,
-    UPLOAD_PICTURE_SUCCESS,
-    UPLOAD_PICTURE_FAILURE
+  UPLOAD_PICTURE,
+  UPLOAD_PICTURE_SUCCESS,
+  UPLOAD_PICTURE_FAILURE,
+  REMOVE_PICTURE,
+  REMOVE_PICTURE_SUCCESS,
+  REMOVE_PICTURE_FAILURE,
 } from '../constants/filestack';
 
-// Triggered by the upload button
 function uploadPicture () {
     return {
         type: UPLOAD_PICTURE
@@ -27,8 +28,30 @@ function uploadPictureFailure () {
     };
 }
 
+function removePicture (url) {
+    return {
+	    type: REMOVE_PICTURE,
+	    url
+    };
+}
+
+function removePictureSuccess () {
+    return {
+      type: REMOVE_PICTURE_SUCCESS
+    };
+}
+
+function removePictureFailure () {
+    return {
+        type: REMOVE_PICTURE_FAILURE
+    };
+}
+
 export {
-    uploadPicture,
-    uploadPictureSuccess,
-    uploadPictureFailure
+  uploadPicture,
+  uploadPictureSuccess,
+  uploadPictureFailure,
+  removePicture,
+  removePictureSuccess,
+  removePictureFailure,
 };

@@ -35,14 +35,10 @@ const deleteServerDish = (id) => {
         }),
         method: 'DELETE',
     })
-        .then(response => response.json())
-        .then(response => {
-            console.log(response.message);
-        });
+        .then(response => response.json());
 };
 
 const postServerDish = (dish) => {
-	console.log(dish);
 	return fetch('http://localhost:8080/dishes', {
 		headers: new Headers({
 			'Content-Type': 'application/json'
@@ -64,7 +60,6 @@ function* getDishes () {
 
 function* deleteDish (action) {
     const { id } = action;
-
     const dishes = yield select(selectedDish);
     try {
         yield call(deleteServerDish, id);
@@ -79,10 +74,10 @@ const getDishForm = (state) => {
 };
 
 function* postDish () {
-    const picture = yield select(selectedPicture);
+	const srcImage = yield select(selectedPicture);
 	const dish = yield select(getDishForm);
 
-	const newDish = Object.assign({}, { picture }, dish.values);
+	const newDish = Object.assign({}, { srcImage }, dish.values);
 	try {
 		yield call(postServerDish, newDish);
 		yield put(postDishSuccess());

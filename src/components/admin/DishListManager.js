@@ -12,7 +12,7 @@ const styles = {
 
 class DishListManager extends React.PureComponent {
     render() {
-        const { dishes, deleteDish } = this.props;
+        const { dishes, deleteDish, removePicture } = this.props;
         return (
             <List style={styles.list}>
                 {dishes.map((data) => (
@@ -20,6 +20,7 @@ class DishListManager extends React.PureComponent {
                         key={data._id}
                         {...data}
                         deleteDish={deleteDish}
+                        removePicture={removePicture}
                     />
                 ))}
             </List>

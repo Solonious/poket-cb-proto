@@ -16,12 +16,11 @@ const styles = {
         margin: '0 auto',
     },
     btn: {
-        marginTop: 50
+        margin: 15
     },
     picture: {
         width: '100%',
-        height: 300,
-        border: '1px solid',
+        height: 'auto',
     }
 };
 
@@ -46,7 +45,6 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
 class DishAddForm extends React.PureComponent{
     render() {
         const { handleSubmit, categories, uploadPicture, picture } = this.props;
-        console.log(picture);
         return (
             <form onSubmit={handleSubmit}>
                 <Card style={styles.card}>
@@ -60,7 +58,7 @@ class DishAddForm extends React.PureComponent{
                         onClick={()=> uploadPicture()}
                     /><br/>
                     <div className="form-group text-center">
-                        <img style={styles.picture} id="picture" className="img-responsive img-upload" src={picture} />
+                        <img style={styles.picture} src={picture} />
                     </div>
                     <Field
                         name="dishName"

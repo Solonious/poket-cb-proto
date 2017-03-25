@@ -17,38 +17,10 @@ const styles = {
 };
 
 class AdminDishContainer extends React.Component{
-    // {/*constructor() {*/}
-    //     super();
-    //     this.getDishes = this.getDishes.bind(this)
-    //     this.deleteDish = this.deleteDish.bind(this)
-    // }
-    // componentDidMount() {
-    //     this.getDishes()
-    // }
-    // getDishes() {
-    //     const url = 'http://localhost:8080/dishes';
-    //     dishFetchData(url).then(dishes => {
-    //         this.setState({
-    //             dishes,
-    //         });
-    //     });
-    // }
-    // deleteDish(id) {
-    //     fetch(`http://localhost:8080/dishes/${id}`, {
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //         }),
-    //         method: 'DELETE',
-    //     })
-    //         .then(response => response.json())
-    //         .then(response => {
-    //             this.setState({ dishes: this.state.dishes.filter(dish => dish._id !== id) });
-    //             console.log(response.message);
-    //         });
-    // }
     render() {
         const { dishes } = this.props;
         const { deleteDish } = this.props.dishesActions;
+        const { removePicture } = this.props.filestackActions;
         return (
             <div>
                 <Card style={styles.card}>
@@ -56,6 +28,7 @@ class AdminDishContainer extends React.Component{
                         <DishListManager
                             dishes={dishes}
                             deleteDish={deleteDish}
+                            removePicture={removePicture}
                         />
                 </Card>
                 <Link to="adddish">
