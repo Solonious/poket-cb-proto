@@ -18,16 +18,16 @@ const styles = {
 	}
 };
 
-const validate = values => {
-    const errors = {};
-    const requiredFields = [ 'name',  'src' ];
-    requiredFields.forEach(field => {
-        if (!values[ field ]) {
-            errors[ field ] = 'Required'
-        }
-    });
-    return errors
-};
+// const validate = values => {
+//     const errors = {};
+//     const requiredFields = [ 'name',  'src' ];
+//     requiredFields.forEach(field => {
+//         if (!values[ field ]) {
+//             errors[ field ] = 'Required'
+//         }
+//     });
+//     return errors
+// };
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
 	<TextField floatingLabelText={label}

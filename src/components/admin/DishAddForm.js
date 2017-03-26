@@ -58,7 +58,7 @@ class DishAddForm extends React.PureComponent{
                         onClick={()=> uploadPicture()}
                     /><br/>
                     <div className="form-group text-center">
-                        <img style={styles.picture} src={picture} />
+                        <img style={styles.picture} src={picture} alt=""/>
                     </div>
                     <Field
                         name="dishName"

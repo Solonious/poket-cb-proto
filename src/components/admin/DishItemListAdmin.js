@@ -21,7 +21,13 @@ const styles = {
 
 class DishItemListAdmin extends React.PureComponent {
     render() {
-        const { _id, dishName, deleteDish, removePicture, srcImage } = this.props;
+        const {
+        	_id,
+	        dishName,
+	        deleteDish,
+	        // removePicture,
+	        // srcImg
+        } = this.props;
         return (
             <li className="Admin-item-list" style={styles.root}>
                 {`${dishName}`}
