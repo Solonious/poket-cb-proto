@@ -8,6 +8,8 @@ import { appConf, dbConf } from './app.config';
 import { getCategories, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
 import { getDishesByCategory, getAllDishes, postDish, getDish, deleteDish, deleteAllDishes } from './app/routes/dishes';
 
+import { signup, login, verifyAuth } from './app/routes/user';
+
 const app = express();
 const port = process.env.PORT || appConf.port;
 
@@ -35,25 +37,28 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.post('/auth/login', login);
+app.post('/auth/signup', signup);
+
 app.route('/category')
 	.get(getCategories)
-	.post(postCategory)
-	.delete(deleteAllCategory);
+	.post(verifyAuth, postCategory)
+	.delete(verifyAuth, deleteAllCategory);
 
 app.route('/category/:id')
-	.delete(deleteCategory);
+	.delete(verifyAuth, deleteCategory);
 
 app.route('/dishes')
 	.get(getAllDishes);
 
 app.route('/dishes')
 	.get(getDishesByCategory)
-	.post(postDish)
-	.delete(deleteAllDishes);
+	.post(verifyAuth, postDish)
+	.delete(verifyAuth, deleteAllDishes);
 // adminka
 app.route('/dishes/:id')
 	.get(getDish)
-	.delete(deleteDish);
+	.delete(verifyAuth, deleteDish);
 
 app.route('/:catId/dishes/:id')
 	.get(getDish);
