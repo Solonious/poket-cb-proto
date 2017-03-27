@@ -2,7 +2,7 @@ import React from 'react';
 import { GridList } from 'material-ui/GridList';
 import { Link } from 'react-router';
 
-// import * as svgIcon from '../../img/index';
+import * as svgIcon from '../../img/index';
 
 const styles = {
 	root: {

@@ -3,6 +3,8 @@ import { watchGetCategories, watchDeleteCategory, watchPostCategory } from './ca
 import { watchGetDishes, watchDeleteDish, watchPostDish } from './dishes';
 import { watchUploadPicture, watchRemovePicture } from './filestack';
 
+import { watchLoginUser, watchSignupUser } from './auth';
+
 export default function* rootSaga () {
 // We start all the sagas in parallel
     yield [
@@ -14,5 +16,7 @@ export default function* rootSaga () {
 	    watchPostDish(),
 	    watchUploadPicture(),
 			watchRemovePicture(),
+	    watchLoginUser(),
+	    watchSignupUser(),
     ];
 }

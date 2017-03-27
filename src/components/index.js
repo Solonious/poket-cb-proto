@@ -14,6 +14,11 @@ import CategoryListManager from './admin/CategoryListManager';
 import DishAddForm from './admin/DishAddForm';
 import DishListManager from './admin/DishListManager';
 import DishItemListAdmin from './admin/DishItemListAdmin';
+//auth components
+import Welcome from './auth/Welcome';
+import Login from './auth/Login';
+import LoginForm from './auth/LoginForm';
+import Signup from './auth/Signup';
 
 export {
 	App,
@@ -28,4 +33,8 @@ export {
 	DishAddForm,
 	DishListManager,
 	DishItemListAdmin,
+	Welcome,
+	Login,
+	LoginForm,
+	Signup,
 };
