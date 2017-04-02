@@ -20,7 +20,7 @@ const getForm = (state, form) => {
 
 // Fetch sends the credentials to the server
 const sendCredentials = (route, credentials) => {
-	return fetch(`http://localhost:8080/auth/${route}`, {
+	return fetch(`http://localhost:8080/${route}`, {
 		headers: new Headers({
 			'Content-Type': 'application/json'
 		}),
@@ -44,7 +44,7 @@ function* loginUser (action) {
 		// Redux-toastr shows the users nice notifications
 		yield put(toastrActions.add({
 			type: 'success', // success is a green notification
-			title: 'Retrogames Archive',
+			title: 'Poket Cookbook',
 			message: result.message
 		}));
 		// We also save the token in the local storage
@@ -65,7 +65,7 @@ function* loginUser (action) {
 		yield put(loginUserFailure());
 		yield put(toastrActions.add({
 			type: 'error', // Red notification
-			title: 'Retrogames Archive',
+			title: 'Poket Cookbook',
 			message: message
 		}));
 	}
@@ -79,15 +79,15 @@ function* signupUser () {
 		// Show a notification in the browser
 		yield put(toastrActions.add({
 			type: 'success',
-			title: 'Retrogames Archive',
+			title: 'Poket Cookbook',
 			message: result.message
 		}));
 		// Set the token in the local storage
 		localStorage.setItem('token', result.token);
 		// Update the state with the token
 		yield put(signupUserSuccess(result.token));
-		// Redirect to /games
-		yield put(push('/games'));
+		// Redirect to root
+		yield put(push('/'));
 	} catch (e) {
 		// As we did for loginUser, we show a personalized message according to the error status
 		let message = '';
@@ -100,7 +100,7 @@ function* signupUser () {
 		yield put(signupUserFailure());
 		yield put(toastrActions.add({
 			type: 'error',
-			title: 'Retrogames Archive',
+			title: 'Poket Cookbook',
 			message: message
 		}));
 	}

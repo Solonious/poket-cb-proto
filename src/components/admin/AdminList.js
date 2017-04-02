@@ -28,8 +28,8 @@ class AdminList extends React.PureComponent {
 				<Card style={styles.card}>
 					<Link to="admin"><h3>Adminka</h3></Link>
 					<List style={styles.list}>
-						<Link key={0} to="/admin/category"><ListItem primaryText="Category"/></Link>
-						<Link key={1} to="/admin/dishes"><ListItem primaryText="Dishes"/></Link>
+						<Link key={0} to="admin/category"><ListItem primaryText="Category"/></Link>
+						<Link key={1} to="admin/dishes"><ListItem primaryText="Dishes"/></Link>
 					</List>
 				</Card>
 				<RaisedButton label="Add" secondary={true} style={styles.btn} />

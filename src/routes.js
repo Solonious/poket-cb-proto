@@ -14,7 +14,7 @@ injectTapEventPlugin();
 import ReduxToastr from 'react-redux-toastr';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { push } from 'react-router-redux';
-import userAuthenticated from './utils';
+import userAuthenticated from './utils/authWrapper';
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store, {
@@ -29,7 +29,7 @@ const options = {
 	redirectAction: ({ pathname, query }) => {
 		if(query.redirect) {
 			// If the user is not logged in go to /auth/login
-			return push(`auth${pathname}?next=${query.redirect}`);
+			return push(`${pathname}?next=${query.redirect}`);
 		}
 	},
 	wrapperDisplayName: 'UserIsJWTAuthenticated'
@@ -42,18 +42,17 @@ const routes = (
 		<div className="wrapper">
     <Router history={history}>
         <Route path="/" component={App} >
-          <IndexRoute component={Home} />
-	        <Route path="add" component={requireAuthentication(AddCategoryContainer)} />
-	        <Route path="admin" component={AdminList}/>
-          <Route path="/admin/category" component={AdminCategoryContainer}/>
-          <Route path="addcat" component={AddCategoryContainer}/>
+          <IndexRoute component={requireAuthentication(Home)} />
+	        <Route path="add" component={AddCategoryContainer} />
+	        <Route path="admin" component={requireAuthentication(AdminList)}/>
+	        <Route path="/admin/category" component={AdminCategoryContainer}/>
+	        <Route path="/admin/dishes" component={AdminDishContainer}/>
+	        <Route path="addcat" component={AddCategoryContainer}/>
           <Route path="adddish" component={AddDishContainer}/>
-          <Route path="/admin/dishes" component={AdminDishContainer}/>
           <Route path="/:catId/dishes" component={Category}/>
           <Route path="/:catId/:dishId" component={SingleDish}/>
-	        <Route path="/welcome" component={Welcome}/>
-	        <Route path="/login" component={LoginForm}/>
-	        <Route path="/signup" component={Signup}/>
+	        <Route path="login" component={LoginForm}/>
+	        <Route path="signup" component={Signup}/>
           <Route path="*" component={Welcome}/>
         </Route>
     </Router>
@@ -61,10 +60,10 @@ const routes = (
 				timeOut={2000}
 				newestOnTop={false}
 				preventDuplicates={true}
-				position="top-right"
+				position="top-center"
 				transitionIn="fadeIn"
 				transitionOut="fadeOut"
-			/>
+				/>
 		</div>
 	</Provider>
 </MuiThemeProvider>

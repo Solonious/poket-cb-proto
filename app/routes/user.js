@@ -63,8 +63,18 @@ const verifyAuth = (req, res, next) => {
 	}
 };
 
+const getUsers = (req, res, next) => {
+	User.find({}, (err, user) => {
+		if(err) {
+			res.send(err);
+		}
+		res.json(user);
+	});
+};
+
 export {
 	signup,
 	login,
-	verifyAuth
+	verifyAuth,
+	getUsers,
 };
