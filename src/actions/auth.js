@@ -4,7 +4,9 @@ import {
 	LOGIN_USER_FAILURE,
 	SIGNUP_USER,
 	SIGNUP_USER_SUCCESS,
-	SIGNUP_USER_FAILURE
+	SIGNUP_USER_FAILURE,
+
+	LOGOUT_USER,
 } from '../constants/auth';
 
 // Intercepted by a redux-saga
@@ -49,6 +51,12 @@ function signupUserFailure () {
 	};
 }
 
+function logoutUser () {
+	return {
+		type: LOGOUT_USER
+	};
+}
+
 export {
 	loginUser,
 	loginUserSuccess,
@@ -56,4 +64,5 @@ export {
 	signupUser,
 	signupUserSuccess,
 	signupUserFailure,
+	logoutUser,
 };

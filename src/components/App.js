@@ -5,11 +5,18 @@ import Immutable from 'immutable';
 import * as categoriesActionCreators from '../actions/categories';
 import * as dishesActionCreators from '../actions/dishes';
 import * as filestackActionCreators from '../actions/filestack';
+import * as authActionCreators from '../actions/auth';
 import Footer from './app/Footer';
 import { Link } from 'react-router';
 
+import { toastr } from 'react-redux-toastr';
+
+import LoginMenu from './auth/LoginMenu';
+
 import cooking from '../img/cooking.svg';
 import './App.css';
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +24,7 @@ class App extends React.Component {
     this.deleteCategory = this.deleteCategory.bind(this);
     this.deleteDish = this.deleteDish.bind(this);
     this.removePicture = this.removePicture.bind(this);
+	  this.logout = this.logout.bind(this);
   }
   componentDidMount() {
     this.getCategories();
@@ -37,10 +45,17 @@ class App extends React.Component {
   removePicture() {
   	this.props.filestackActions.removePicture();
   }
+	logout () {
+		this.props.authActions.logoutUser();
+		toastr.success('Poket cookbook', 'Your are now logged out');
+		localStorage.removeItem('token');
+	}
   render() {
+  	const { userName } = this.props;
     return (
       <div className="App">
         <div className="App-header">
+	        <LoginMenu userName={userName} logout={this.logout} />
           <Link to="admin"><img src={cooking} className="App-logo" alt="logo" /></Link>
           <Link to="/"><h2>Poket  COOKBOOK</h2></Link>
         </div>
@@ -55,6 +70,7 @@ function mapStateToProps (state) {
 	return {
 		categories: state.getIn(['categories', 'list'], Immutable.List()).toJS(),
 		dishes: state.getIn(['dishes', 'list'], Immutable.List()).toJS(),
+		userName: state.getIn(['auth', 'name']),
 	}
 }
 
@@ -63,6 +79,7 @@ function mapDispatchToProps (dispatch) {
 		categoriesActions: bindActionCreators(categoriesActionCreators, dispatch),
 		dishesActions: bindActionCreators(dishesActionCreators, dispatch),
 		filestackActions: bindActionCreators(filestackActionCreators, dispatch),
+		authActions: bindActionCreators(authActionCreators, dispatch),
 	};
 }
 

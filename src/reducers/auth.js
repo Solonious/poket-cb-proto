@@ -5,7 +5,8 @@ import {
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAILURE,
 	SIGNUP_USER_SUCCESS,
-	SIGNUP_USER_FAILURE
+	SIGNUP_USER_FAILURE,
+	LOGOUT_USER,
 } from '../constants/auth';
 
 // The initial state has no token hence no name and isAuthenticated is false
@@ -28,7 +29,8 @@ export default (state = initialState, action) => {
 		}
 		// In case of failure the state goes back to the initial one
 		case SIGNUP_USER_FAILURE:
-		case LOGIN_USER_FAILURE: return state.merge(initialState);
+		case LOGIN_USER_FAILURE:
+		case LOGOUT_USER: return state.merge(initialState);
 		default: return state;
 	}
 }

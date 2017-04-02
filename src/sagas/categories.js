@@ -1,6 +1,8 @@
 import 'babel-polyfill';
 import { takeLatest } from 'redux-saga/effects';
 import { put, call, select } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
+import {actions as toastrActions} from 'react-redux-toastr';
 import { GET_CATEGORIES, DELETE_CATEGORY, POST_CATEGORY } from '../constants/categories';
 import {
     getCategoriesSuccess,
@@ -11,8 +13,14 @@ import {
     postCategoryFailure
 } from '../actions/categories';
 
+import { logoutUser } from '../actions/auth';
+
 const selectedCategory = (state) => {
     return state.getIn(['categories', 'list']).toJS();
+};
+
+const selectedPicture = (state) => {
+	return state.getIn(['filestack', 'url'], '');
 };
 
 const fetchCategories = () => {
@@ -31,21 +39,29 @@ const deleteServerCategory = (id) => {
 			}),
 			method: 'DELETE',
 		})
-			.then(response => response.json())
 			.then(response => {
-				console.log(response.message);
+				if (response.status === 200) {
+					return response.json();
+				}
+				throw response;
 			});
 };
 
 const postServerCategory = (category) => {
   return fetch('http://localhost:8080/category', {
       headers: new Headers({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+	      'x-access-token': localStorage.getItem('token')
       }),
       method: 'POST',
       body: JSON.stringify(category)
   })
-      .then(res => res.json());
+	  .then(response => {
+		  if (response.status === 200) {
+			  return response.json();
+		  }
+		  throw response;
+	  });
 };
 
 function* getCategories () {
@@ -62,10 +78,28 @@ function* deleteCategory (action) {
 
     const categories = yield select(selectedCategory);
     try {
-        yield call(deleteServerCategory, id);
+        const result = yield call(deleteServerCategory, id);
+        yield put(toastrActions.add({
+        	type: 'success',
+		    title: 'Poket Cookbook',
+		    message:result.message
+	    }));
         yield put(deleteCategorySuccess(categories.filter(category => category._id !== id)));
     } catch (err) {
+    	let message = '';
+    	if(err.status === 403) {
+    		yield put(logoutUser());
+    		message = 'Invalid token. You are being logged off';
+	    } else {
         yield put(deleteCategoryFailure());
+        message = 'Sorry, an error occured!';
+	    }
+	    localStorage.removeItem('token');
+	    yield put(toastrActions.add({
+		    type: 'error',
+		    title: 'Poket Cookbook',
+		    message: message
+	    }));
     }
 }
 
@@ -74,14 +108,33 @@ const getCategoryForm = (state) => {
 };
 
 function* postCategory () {
-    const category = yield select(getCategoryForm);
-
-    const newCategory = Object.assign({}, category.values);
+	const picture = yield select(selectedPicture);
+	const category = yield select(getCategoryForm);
+	const newCategory = Object.assign({}, { picture }, category.values);
     try {
-        yield call(postServerCategory, newCategory);
-        yield put(postCategorySuccess());
+	    const result = yield call(postServerCategory, newCategory);
+	    yield put(toastrActions.add({
+		    type: 'success',
+		    title: 'Poket Cookbook',
+		    message: result.message
+	    }));
+	    yield put(postCategorySuccess());
+	    yield put(push('/categories'))
     } catch (err) {
-        yield put(postCategoryFailure());
+	    let message = '';
+	    if (err.status === 403) {
+		    yield put(logoutUser());
+		    message = 'Invalid token. You are being logged off';
+	    } else {
+		    yield put(postCategoryFailure());
+		    message = 'Sorry, an error occured!';
+	    }
+	    localStorage.removeItem('token');
+	    yield put(toastrActions.add({
+		    type: 'error',
+		    title: 'Poket Cookbook',
+		    message: message
+	    }));
     }
 }
 

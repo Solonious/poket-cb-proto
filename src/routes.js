@@ -53,11 +53,11 @@ const routes = (
           <Route path="/:catId/:dishId" component={SingleDish}/>
 	        <Route path="login" component={LoginForm}/>
 	        <Route path="signup" component={Signup}/>
-          <Route path="*" component={Welcome}/>
+          <Route path="*" component={App}/>
         </Route>
     </Router>
 			<ReduxToastr
-				timeOut={2000}
+				timeOut={1000}
 				newestOnTop={false}
 				preventDuplicates={true}
 				position="top-center"

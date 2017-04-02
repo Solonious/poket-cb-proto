@@ -35,7 +35,6 @@ class Signup extends React.PureComponent {
 		this.props.authActions.signupUser(this.props.location.query.next || '/');
 	}
 	render () {
-		const { picture, uploadPicture } = this.props;
 		return (
 			<Card style={styles.card}>
 				<form onSubmit={this.props.handleSubmit}>
