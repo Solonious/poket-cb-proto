@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form/immutable';
 import { Card } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
@@ -21,6 +20,22 @@ const styles = {
 	}
 };
 
+const validate = values => {
+	const errors = {};
+	const requiredFields = ['name', 'email', 'password'];
+	requiredFields.forEach(field => {
+		if (!values[ field ]) {
+			errors[ field ] = 'Required'
+		}
+	});
+	if (!values.get('email')) {
+		errors.email = 'Required'
+	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.get('email'))) {
+		errors.email = 'Invalid email address'
+	}
+	return errors
+};
+
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
 	<TextField floatingLabelText={label}
 	           errorText={touched && error}
@@ -35,7 +50,7 @@ class LoginForm extends React.PureComponent {
 		this.props.authActions.loginUser(this.props.location.query.next || '/');
 	}
 	render () {
-		const { picture, uploadPicture } = this.props;
+		const { pristine, reset, submitting } = this.props;
 		return (
 			<Card style={styles.card}>
 				<form>
@@ -51,8 +66,7 @@ class LoginForm extends React.PureComponent {
 						<Field
 							name="email"
 							component={renderTextField}
-							label="E-mail"
-							type="email"
+							label="Email"
 						/>
 					</div>
 					<div>
@@ -63,10 +77,8 @@ class LoginForm extends React.PureComponent {
 							type="password"
 						/>
 					</div>
-					<RaisedButton label="Add" secondary={true} style={styles.btn} onClick={() => this.login()}/>
-					<Link to='/welcome'>
-						<RaisedButton label="Back" primary={true} style={styles.btn} />
-					</Link>
+					<RaisedButton label="Log in" disabled={pristine || submitting} secondary={true} style={styles.btn} onClick={() => this.login()}/>
+					<RaisedButton label="Clear" disabled={pristine || submitting} primary={true} style={styles.btn} type="reset" onClick={reset}/>
 				</form>
 			</Card>
 		);
@@ -79,4 +91,7 @@ function mapDispatchToProps (dispatch) {
 	};
 }
 
-export default reduxForm({ form: 'login' })(connect(null, mapDispatchToProps)(LoginForm));
+export default reduxForm({
+	form: 'login',
+	validate
+})(connect(null, mapDispatchToProps)(LoginForm));

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form/immutable';
 import { Card } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
@@ -29,12 +28,29 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 	/>
 );
 
+const validate = values => {
+	const errors = {};
+	const requiredFields = ['name', 'email', 'password'];
+	requiredFields.forEach(field => {
+		if (!values[ field ]) {
+			errors[ field ] = 'Required'
+		}
+	});
+	if (!values.get('email')) {
+		errors.email = 'Required'
+	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.get('email'))) {
+		errors.email = 'Invalid email address'
+	}
+	return errors
+};
+
 class Signup extends React.PureComponent {
 	register () {
 		// dispatch action to the redux-saga
 		this.props.authActions.signupUser(this.props.location.query.next || '/');
 	}
 	render () {
+		const { pristine, submitting, reset } = this.props;
 		return (
 			<Card style={styles.card}>
 				<form onSubmit={this.props.handleSubmit}>
@@ -62,10 +78,20 @@ class Signup extends React.PureComponent {
 							type="password"
 						/>
 					</div>
-					<RaisedButton label="Add" secondary={true} style={styles.btn} onClick={() => this.register()}/>
-					<Link to='/welcome'>
-						<RaisedButton label="Back" primary={true} style={styles.btn} />
-					</Link>
+					<RaisedButton
+						label="Add user"
+						disabled={pristine || submitting}
+						secondary={true}
+						style={styles.btn}
+						onClick={() => this.register()}
+					/>
+					<RaisedButton
+						label="Clear"
+						disabled={pristine || submitting}
+						primary={true}
+						style={styles.btn}
+						onClick={reset}
+					/>
 				</form>
 			</Card>
 		);
@@ -78,4 +104,7 @@ function mapDispatchToProps (dispatch) {
 	};
 }
 
-export default reduxForm({ form: 'signup' })(connect(null, mapDispatchToProps)(Signup));
+export default reduxForm({
+	form: 'signup',
+	validate,
+})(connect(null, mapDispatchToProps)(Signup));
