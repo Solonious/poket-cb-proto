@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { Field, reduxForm } from 'redux-form/immutable';
+import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 
 const styles = {
 	card: {
@@ -15,6 +16,12 @@ const styles = {
 	},
 	btn: {
 		marginTop: 50
+	},
+	picture: {
+		display: 'none',
+		width: '30%',
+		height: 'auto',
+		margin: '20px auto',
 	}
 };
 
@@ -39,7 +46,7 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 
 class CategoryAddForm extends React.PureComponent{
 	render() {
-		const { handleSubmit } = this.props;
+		const { handleSubmit, uploadPicture, picture } = this.props;
         return (
 			<form onSubmit={handleSubmit}>
 				<Card style={styles.card}>
@@ -52,11 +59,19 @@ class CategoryAddForm extends React.PureComponent{
 						/>
 					</div>
 					<div>
-						<Field
-							name="src"
-							component={renderTextField}
-							label="Image src"
+						<RaisedButton
+							secondary={true}
+							style={styles.btn}
+							label="Upload"
+							labelPosition="before"
+							icon={<KeyboardArrowDown/>}
+							onClick={()=> {
+								uploadPicture()
+							}}
 						/><br/>
+						<div>
+							<img id="picture" style={styles.picture} src={picture} alt=""/>
+						</div>
 					</div>
 					<RaisedButton label="Add" type="submit" secondary={true} style={styles.btn} />
 				</Card>

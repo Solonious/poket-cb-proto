@@ -33,7 +33,7 @@ app.use(express.static(__dirname + '/build'));
 app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
-	res.header("Access-Control-Allow-Headers", "Origin, X-requested-Width, Content-Type, Accept");
+	res.header("Access-Control-Allow-Headers", "Origin, X-requested-Width, Content-Type, Accept, x-access-token");
 	next();
 });
 
@@ -45,8 +45,8 @@ app.route('/users')
 
 app.route('/category')
 	.get(getCategories)
-	.post(verifyAuth, postCategory)
-	.delete(verifyAuth, deleteAllCategory);
+	.post(postCategory)
+	.delete(deleteAllCategory);
 
 app.route('/category/:id')
 	.delete(verifyAuth, deleteCategory);
@@ -56,12 +56,12 @@ app.route('/dishes')
 
 app.route('/dishes')
 	.get(getDishesByCategory)
-	.post(verifyAuth, postDish)
+	.post(postDish)
 	.delete(verifyAuth, deleteAllDishes);
 // adminka
 app.route('/dishes/:id')
 	.get(getDish)
-	.delete(verifyAuth, deleteDish);
+	.delete(deleteDish);
 
 app.route('/:catId/dishes/:id')
 	.get(getDish);

@@ -4,9 +4,6 @@ import { Link } from 'react-router';
 
 import 'react-redux-toastr/src/styles/index.scss';
 
-
-import * as svgIcon from '../../img/index';
-
 const styles = {
 	root: {
 		display: 'flex',
@@ -48,7 +45,7 @@ class Home extends React.PureComponent {
 							style={styles.btn}
 							key={tile._id}
 						>
-							<img src={tile.src} style={styles.img} alt=""/>
+							<img src={tile.picture} style={styles.img} alt=""/>
 							<h3 style={styles.title}>{tile.name}</h3>
 						</Link>
 					))}

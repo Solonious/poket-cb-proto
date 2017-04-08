@@ -7,7 +7,7 @@ var categorySchema = new Schema({
 		type: String,
 		required: true,
 	},
-	src: {
+	picture: {
 		type: String,
 		required: true
 	}

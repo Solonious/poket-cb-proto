@@ -10,14 +10,31 @@ import {
 
 import filestack from 'filestack-js';
 
+// const handle = 'A5I5qpNVRAusZb7gyxSiIz';
+// const expire = Math.floor(new Date().getTime() / 1000 + 60*60);
+// const policyObj = {
+// 	handle,
+// 	expire
+// };
 
-const client = filestack.init('A5I5qpNVRAusZb7gyxSiIz');
+// const jsonPolicy = JSON.stringify(policyObj);
+
+const client = filestack.init('A5I5qpNVRAusZb7gyxSiIz',
+	// {
+	// policy: window.btoa(jsonPolicy),
+	// signature: '79e6859a77517802e5f9d77d6bde96313954cae461aaee54fcc702e95904eaea'
+// }
+);
 
 const pick = () => {
    return client.pick({
-        accept: 'image/*',
+        accept: ['image/*'],
         fromSources: ['local_file_system'],
+	   hideWhenUploading: true,
+	   uploadInBackground: true
     }).then(res => {
+    	console.log(res.filesUploaded);
+	   document.getElementById('picture').style.display = 'block';
        return res.filesUploaded[0].url;
    });
 };

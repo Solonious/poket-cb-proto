@@ -49,7 +49,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
 	return {
 		dishesActions: bindActionCreators(dishesActionCreators, dispatch),
-        filestackActions: bindActionCreators(filestackActionCreators, dispatch)
+		filestackActions: bindActionCreators(filestackActionCreators, dispatch)
 	};
 }
 

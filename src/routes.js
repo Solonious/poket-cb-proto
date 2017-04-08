@@ -1,9 +1,10 @@
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { Category, Home, SingleDish, AdminList, App, Welcome, LoginForm, Signup } from './components';
+import { Category, Home, SingleDish, AdminList, App, LoginForm, Signup } from './components';
 import { AddCategoryContainer, AddDishContainer, AdminCategoryContainer, AdminDishContainer } from './containers';
 import { Provider } from 'react-redux';
 import configureStore from './store';
+import { loginUserSuccess } from './actions/auth';
 
 import { syncHistoryWithStore } from 'react-router-redux';
 
@@ -12,7 +13,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 import ReduxToastr from 'react-redux-toastr';
-import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { push } from 'react-router-redux';
 import userAuthenticated from './utils/authWrapper';
 
@@ -68,5 +68,10 @@ const routes = (
 	</Provider>
 </MuiThemeProvider>
 );
+
+const token = localStorage.getItem('token');
+if (token !== null) {
+	store.dispatch(loginUserSuccess(token));
+}
 
 export default routes;

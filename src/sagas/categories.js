@@ -29,13 +29,14 @@ const fetchCategories = () => {
             'Content-Type': 'application/json'
         })
     })
-        .then(response => response.json())
+	    .then(response => response.json())
 };
 
 const deleteServerCategory = (id) => {
     return fetch(`http://localhost:8080/category/${id}`, {
 			headers: new Headers({
 				'Content-Type': 'application/json',
+				'x-access-token': localStorage.getItem('token')
 			}),
 			method: 'DELETE',
 		})
@@ -50,7 +51,7 @@ const deleteServerCategory = (id) => {
 const postServerCategory = (category) => {
   return fetch('http://localhost:8080/category', {
       headers: new Headers({
-          'Content-Type': 'application/json',
+	      'Content-Type': 'application/json',
 	      'x-access-token': localStorage.getItem('token')
       }),
       method: 'POST',
@@ -75,7 +76,6 @@ function* getCategories () {
 
 function* deleteCategory (action) {
     const { id } = action;
-
     const categories = yield select(selectedCategory);
     try {
         const result = yield call(deleteServerCategory, id);
@@ -119,7 +119,7 @@ function* postCategory () {
 		    message: result.message
 	    }));
 	    yield put(postCategorySuccess());
-	    yield put(push('/categories'))
+	    yield put(push('/admin/category'))
     } catch (err) {
 	    let message = '';
 	    if (err.status === 403) {
