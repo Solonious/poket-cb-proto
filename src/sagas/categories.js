@@ -36,7 +36,7 @@ const deleteServerCategory = (id) => {
     return fetch(`http://localhost:8080/category/${id}`, {
 			headers: new Headers({
 				'Content-Type': 'application/json',
-				'x-access-token': localStorage.getItem('token')
+				'x-access-token':  localStorage.getItem('token')
 			}),
 			method: 'DELETE',
 		})
