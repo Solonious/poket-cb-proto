@@ -5,18 +5,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 import { Link } from 'react-router';
 
-const styles = {
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-    },
-    gridList: {
-        width: 400,
-        height: 450,
-        overflowY: 'auto',
-    },
-};
+import styles from '../styles';
 
 class Category extends React.PureComponent {
 	render() {
@@ -26,10 +15,10 @@ class Category extends React.PureComponent {
   		return dish.category === catId;
 	  });
 		return (
-      <div style={styles.root}>
+      <div style={styles.rootCategory}>
         <GridList
           cellHeight={180}
-          style={styles.gridList}
+          style={styles.adminlist}
         >
             {currentCategoryDishes.map((tile) => (
                 <Link

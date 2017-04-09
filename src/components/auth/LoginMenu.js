@@ -8,22 +8,7 @@ import { red700, green700 } from 'material-ui/styles/colors';
 
 import userAuthenticated from '../../utils/authWrapper';
 
-const styles = {
-	menu: {
-		float: 'right',
-		position: 'absolute',
-		top: 0,
-		right: 0,
-	},
-	nameBtn: {
-		float: 'left',
-		margin: '18px 0',
-		fontSize: '0.8rem'
-	},
-	logOut: {
-		color: 'green'
-	}
-};
+import styles from '../styles';
 
 class LoginMenu extends React.PureComponent {
 	render () {

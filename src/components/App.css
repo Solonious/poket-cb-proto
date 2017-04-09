@@ -1,24 +1,10 @@
-.App {
-  text-align: center;
+a {
+	text-decoration: none;
 }
 
 .App-logo {
   animation: App-book-scale infinite 2s linear;
   height: 40px;
-}
-
-.App-header {
-	max-width: 400px;
-	margin: 20px auto;
-  background-color: #fff;
-  height: 100px;
-  color: #000;
-	position: relative;
-}
-
-h2 {
-  font-size: 1.7rem;
-  font-family: Glamour, sans-serif;
 }
 
 /*CategoryListItem*/
@@ -38,6 +24,4 @@ h2 {
 @font-face {
   font-family: Glamour;
   src: url(../fonts/CraftyGirls.ttf);
-  /*font-family: Jenifer;*/
-  /*src: url(../fonts/jenniferbold.ttf);*/
 }

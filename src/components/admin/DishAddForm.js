@@ -7,24 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import { Field, reduxForm } from 'redux-form/immutable';
 
-const styles = {
-    card: {
-        width: '100%',
-        maxWidth: 400,
-        height: 450,
-        overflowY: 'auto',
-        margin: '0 auto',
-    },
-    btn: {
-        margin: 15
-    },
-    picture: {
-    	display: 'none',
-	    width: '60%',
-	    height: 'auto',
-	    margin: '0 auto',
-    }
-};
+import styles from '../styles';
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
     <TextField floatingLabelText={label}
@@ -47,21 +30,20 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
 class DishAddForm extends React.PureComponent{
     render() {
         const { handleSubmit, categories, uploadPicture, picture } = this.props;
-        console.log(picture);
         return (
             <form onSubmit={handleSubmit}>
                 <Card style={styles.card}>
                     <h3>Add Dish</h3>
                     <RaisedButton
                         secondary={true}
-                        style={styles.btn}
+                        style={styles.flatBtn}
                         label="Upload"
                         labelPosition="before"
                         icon={<KeyboardArrowDown/>}
                         onClick={()=> uploadPicture()}
                     /><br/>
                     <div className="form-group text-center">
-                        <img id='picture' style={styles.picture} src={picture} alt=""/>
+                        <img id='picture' style={styles.uploadedPicture} src={picture} alt=""/>
                     </div>
                     <Field
                         name="dishName"
@@ -88,7 +70,7 @@ class DishAddForm extends React.PureComponent{
                         multiLine={true}
                         rows={2}
                     /><br />
-                    <RaisedButton label="Add" type="submit" secondary={true} style={styles.btn} />
+                    <RaisedButton label="Add" type="submit" secondary={true} style={styles.flatBtn} />
                 </Card>
             </form>
         );

@@ -6,24 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Field, reduxForm } from 'redux-form/immutable';
 import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 
-const styles = {
-	card: {
-		width: '100%',
-		maxWidth: 400,
-		height: 450,
-		overflowY: 'auto',
-		margin: '0 auto',
-	},
-	btn: {
-		marginTop: 50
-	},
-	picture: {
-		display: 'none',
-		width: '30%',
-		height: 'auto',
-		margin: '20px auto',
-	}
-};
+import styles from '../styles';
 
 // const validate = values => {
 //     const errors = {};
@@ -61,7 +44,7 @@ class CategoryAddForm extends React.PureComponent{
 					<div>
 						<RaisedButton
 							secondary={true}
-							style={styles.btn}
+							style={styles.flatBtn}
 							label="Upload"
 							labelPosition="before"
 							icon={<KeyboardArrowDown/>}
@@ -70,10 +53,10 @@ class CategoryAddForm extends React.PureComponent{
 							}}
 						/><br/>
 						<div>
-							<img id="picture" style={styles.picture} src={picture} alt=""/>
+							<img id="picture" style={styles.uploadedPicture} src={picture} alt=""/>
 						</div>
 					</div>
-					<RaisedButton label="Add" type="submit" secondary={true} style={styles.btn} />
+					<RaisedButton label="Add" type="submit" secondary={true} style={styles.flatBtn} />
 				</Card>
 			</form>
         );

@@ -3,50 +3,26 @@ import { GridList } from 'material-ui/GridList';
 import { Link } from 'react-router';
 
 import 'react-redux-toastr/src/styles/index.scss';
-
-const styles = {
-	root: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		justifyContent: 'space-around',
-		fontFamily: 'Glamour',
-	},
-	gridList: {
-		width: 400,
-		height: 450,
-		overflowY: 'auto',
-	},
-	btn: {
-		border: 'none',
-		background: 'transparent',
-		cursor: 'pointer'
-	},
-	img: {
-		width: '50%'
-	},
-	title: {
-		lineHeight: 0.1
-	}
-};
+import styles from '../styles';
 
 class Home extends React.PureComponent {
 	render() {
 		const { categories } = this.props;
 		return (
-			<div style={styles.root}>
+			<div style={styles.rootCategory}>
 				<GridList
 					cellHeight={'auto'}
-					style={styles.gridList}
+					style={styles.adminlist}
 				>
 					 {categories.map((tile) => (
 						<Link
 							to={`/${tile.name}/dishes`}
 							className="btn-home"
-							style={styles.btn}
+							style={styles.pictureBtn}
 							key={tile._id}
 						>
-							<img src={tile.picture} style={styles.img} alt=""/>
-							<h3 style={styles.title}>{tile.name}</h3>
+							<img src={tile.picture} style={styles.picture} alt=""/>
+							<h3 style={styles.pictureTitle}>{tile.name}</h3>
 						</Link>
 					))}
 				</GridList>

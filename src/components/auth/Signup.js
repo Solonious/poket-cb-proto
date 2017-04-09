@@ -7,18 +7,7 @@ import * as authActionCreators from '../../actions/auth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const styles = {
-	card: {
-		width: '100%',
-		maxWidth: 400,
-		height: 450,
-		overflowY: 'auto',
-		margin: '0 auto',
-	},
-	btn: {
-		marginTop: 50
-	}
-};
+import styles from '../styles';
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
 	<TextField floatingLabelText={label}
@@ -82,14 +71,14 @@ class Signup extends React.PureComponent {
 						label="Add user"
 						disabled={pristine || submitting}
 						secondary={true}
-						style={styles.btn}
+						style={styles.flatBtn}
 						onClick={() => this.register()}
 					/>
 					<RaisedButton
 						label="Clear"
 						disabled={pristine || submitting}
 						primary={true}
-						style={styles.btn}
+						style={styles.flatBtn}
 						onClick={reset}
 					/>
 				</form>

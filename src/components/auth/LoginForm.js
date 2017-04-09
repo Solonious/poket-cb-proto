@@ -7,18 +7,7 @@ import * as authActionCreators from '../../actions/auth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const styles = {
-	card: {
-		width: '100%',
-		maxWidth: 400,
-		height: 450,
-		overflowY: 'auto',
-		margin: '0 auto',
-	},
-	btn: {
-		marginTop: 50
-	}
-};
+import styles from '../styles';
 
 const validate = values => {
 	const errors = {};
@@ -77,8 +66,8 @@ class LoginForm extends React.PureComponent {
 							type="password"
 						/>
 					</div>
-					<RaisedButton label="Log in" disabled={pristine || submitting} secondary={true} style={styles.btn} onClick={() => this.login()}/>
-					<RaisedButton label="Clear" disabled={pristine || submitting} primary={true} style={styles.btn} type="reset" onClick={reset}/>
+					<RaisedButton label="Log in" disabled={pristine || submitting} secondary={true} style={styles.flatBtn} onClick={() => this.login()}/>
+					<RaisedButton label="Clear" disabled={pristine || submitting} primary={true} style={styles.flatBtn} type="reset" onClick={reset}/>
 				</form>
 			</Card>
 		);

@@ -3,15 +3,7 @@ import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Car
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router';
 
-const styles = {
-	card: {
-		width: '100%',
-		maxWidth: 400,
-		height: 450,
-		overflowY: 'auto',
-		margin: '0 auto',
-	},
-};
+import styles from '../styles';
 
 class SingleDish extends React.PureComponent {
 	render() {

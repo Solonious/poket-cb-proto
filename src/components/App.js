@@ -16,7 +16,7 @@ import LoginMenu from './auth/LoginMenu';
 import chef from '../../public/img/icons/chef.svg';
 import './App.css';
 
-
+import styles from './styles';
 
 class App extends React.Component {
   constructor(props) {
@@ -53,8 +53,8 @@ class App extends React.Component {
   render() {
   	const { userName } = this.props;
     return (
-      <div className="App">
-        <div className="App-header">
+      <div style={styles.app}>
+        <div style={styles.appHeader}>
 	        <LoginMenu userName={userName} logout={this.logout} />
           <Link to="admin"><img src={chef} className="App-logo" alt="logo" /></Link>
           <Link to="/"><h2>Poket  COOKBOOK</h2></Link>

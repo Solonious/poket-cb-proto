@@ -3,19 +3,13 @@ import React from 'react';
 import {List} from 'material-ui/List';
 import { CategoryItemListAdmin } from '../index';
 
-const styles = {
-	list: {
-		width: 400,
-		height: 400,
-		margin: '0 auto'
-	},
-};
+import styles from '../styles';
 
 class CategoryListManager extends React.PureComponent {
 	render() {
 		const { categories, deleteCategory } = this.props;
 		return (
-			<List style={styles.list}>
+			<List style={styles.adminList}>
 				{categories.map((data) => (
 						<CategoryItemListAdmin
 							key={data._id}

@@ -1,12 +1,12 @@
 import React from 'react';
+import styles from '../styles';
 
-import './Footer.css';
 import { YEAR } from '../../libs/helpers';
 
 class Footer extends React.PureComponent {
     render() {
         return (
-            <div className="Footer">
+            <div style={styles.footer}>
                 <h5>&copy; All right reserved {YEAR}</h5>
             </div>
         );
