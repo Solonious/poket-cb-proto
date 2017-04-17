@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
 import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
 	email: { type: String, unique: true, lowercase: true },
 	password: { type: String, select: false },
-	name: String
+	name: String,
+	admin: { type: Boolean, default: false },
 });
 
 userSchema.pre('save', function (next) {

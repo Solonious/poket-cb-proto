@@ -6,9 +6,17 @@ import mongoose from 'mongoose';
 import { appConf, dbConf } from './app.config';
 
 import { getCategories, postCategory, deleteCategory, deleteAllCategory } from './app/routes/category';
-import { getDishesByCategory, getAllDishes, postDish, getDish, deleteDish, deleteAllDishes } from './app/routes/dishes';
+import {
+	getDishesByCategory,
+	getAllDishes,
+	postDish,
+	getDish,
+	deleteDish,
+	deleteAllDishes,
+	postComment,
+} from './app/routes/dishes';
 
-import { signup, login, verifyAuth, getUsers } from './app/routes/user';
+import { signup, login, verifyAuth, getUsers, verifyAdminAuth, deleteAllUsers } from './app/routes/user';
 
 const app = express();
 const port = process.env.PORT || appConf.port;
@@ -37,34 +45,42 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.post('/login', login);
-app.post('/signup', signup);
+app.post('/login', login);      // /login for authorization
+app.post('/signup', signup);    // /signup for registration
 
 app.route('/users')
-	.get(getUsers);
+	.get(verifyAuth, verifyAdminAuth, getUsers)
+	.delete(deleteAllUsers);               // get all users
 
 app.route('/category')
 	.get(getCategories)
-	.post(postCategory)
-	.delete(deleteAllCategory);
+	.post(verifyAuth, verifyAdminAuth, postCategory)
+	.delete(verifyAuth, verifyAdminAuth, deleteAllCategory);
 
 app.route('/category/:id')
-	.delete(verifyAuth, deleteCategory);
+	.delete(verifyAuth, verifyAdminAuth, deleteCategory);
 
 app.route('/dishes')
 	.get(getAllDishes);
 
 app.route('/dishes')
 	.get(getDishesByCategory)
-	.post(postDish)
-	.delete(verifyAuth, deleteAllDishes);
+	.post(verifyAuth, verifyAdminAuth, postDish)
+	.delete(verifyAuth, verifyAdminAuth, deleteAllDishes);
+
+app.route('/dishes/:id/comment')
+	.post(verifyAuth, postComment);
 // adminka
 app.route('/dishes/:id')
-	.get(getDish)
-	.delete(deleteDish);
+	.get(verifyAdminAuth, getDish)
+	.delete(verifyAdminAuth, deleteDish);
 
 app.route('/:catId/dishes/:id')
-	.get(getDish);
+	.get(verifyAdminAuth, getDish);
+
+app.route("*").get((req, res) => {
+	res.sendFile('build/index.html', { root: __dirname });
+});
 
 app.listen(port, () => {
 	console.log(`Listenning on port ${port}`);

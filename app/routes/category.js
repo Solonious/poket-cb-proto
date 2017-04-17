@@ -10,9 +10,6 @@ const getCategories = (req, res) => {
 };
 
 const postCategory = (req, res) => {
-	console.log(req);
-
-
 	let cat = Object.assign(new Category(), req.body);
 
 	cat.save(err => {

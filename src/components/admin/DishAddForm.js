@@ -7,6 +7,8 @@ import MenuItem from 'material-ui/MenuItem';
 import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import { Field, reduxForm } from 'redux-form/immutable';
 
+import MyStatefulEditor from './TextEditor';
+
 import styles from '../styles';
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
@@ -25,6 +27,11 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
     onChange={(event, index, value) => input.onChange(value)}
     children={children}
 		{...custom}/>
+);
+const TextEditor = ({ input }) => (
+	<MyStatefulEditor
+		{...input}
+	/>
 );
 
 class DishAddForm extends React.PureComponent{
@@ -63,13 +70,10 @@ class DishAddForm extends React.PureComponent{
 			                ))}
                     </Field>
                     <br />
-                    <Field
-                        name="description"
-                        component={renderTextField}
-                        label="Description"
-                        multiLine={true}
-                        rows={2}
-                    /><br />
+	                <Field
+		                name="description"
+	                  component={TextEditor}
+	                />
                     <RaisedButton label="Add" type="submit" secondary={true} style={styles.flatBtn} />
                 </Card>
             </form>

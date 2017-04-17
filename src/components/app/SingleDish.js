@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 
 import styles from '../styles';
 
+import ReactHtmlParser from 'react-html-parser';
+
 class SingleDish extends React.PureComponent {
 	render() {
 		const { dishes } = this.props;
@@ -22,7 +24,7 @@ class SingleDish extends React.PureComponent {
 						alt=""/>
 				</CardMedia>
 				<CardTitle title={dish.dishName} subtitle={dish.category}/>
-				<CardText>{dish.description}</CardText>
+				<CardText style={styles.cardTitle}>{ReactHtmlParser(dish.description)}</CardText>
 				<CardActions>
 					<Link to={`/${catId}/dishes`}>
 						<FlatButton label="Return"/>

@@ -46,6 +46,9 @@ const styles = {
 		overflowY: 'auto',
 		margin: '0 auto',
 	},
+	cardTitle: {
+		textAlign: 'justify'
+	},
 	btnContainer: {
 		width: '60%',
 		margin: '0 auto'

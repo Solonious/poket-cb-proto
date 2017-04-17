@@ -28,7 +28,7 @@ const options = {
 	predicate: auth => auth.get('isAuthenticated'),
 	redirectAction: ({ pathname, query }) => {
 		if(query.redirect) {
-			// If the user is not logged in go to /auth/login
+			// If the user is not logged in go to /login
 			return push(`${pathname}?next=${query.redirect}`);
 		}
 	},
@@ -44,7 +44,7 @@ const routes = (
         <Route path="/" component={App} >
           <IndexRoute component={requireAuthentication(Home)} />
 	        <Route path="add" component={AddCategoryContainer} />
-	        <Route path="admin" component={requireAuthentication(AdminList)}/>
+	        <Route path="admin" component={AdminList}/>
 	        <Route path="/admin/category" component={AdminCategoryContainer}/>
 	        <Route path="/admin/dishes" component={AdminDishContainer}/>
 	        <Route path="addcat" component={AddCategoryContainer}/>
@@ -57,7 +57,7 @@ const routes = (
         </Route>
     </Router>
 			<ReduxToastr
-				timeOut={1000}
+				timeOut={2000}
 				newestOnTop={false}
 				preventDuplicates={true}
 				position="top-center"

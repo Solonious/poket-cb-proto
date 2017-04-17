@@ -42,7 +42,6 @@ const postDish = (req, res) => {
 };
 
 const deleteDish = (req, res) => {
-	const { srcImage } = req.params;
 	console.log(req.params);
     Dish.remove({ _id: req.params.id }, err => {
         if(err) {
@@ -59,11 +58,26 @@ const deleteAllDishes = (req, res) => {
 	});
 };
 
+const postComment = (req, res) => {
+	const { id } = req.params;
+		Dish.findById(id, function (err, dish) {
+			console.log(dish);
+			if (err) throw err;
+			dish.comments.push(req.body);
+			dish.save(function (err, dish) {
+				if (err) throw err;
+				console.log('Updated Comments!');
+				res.json(dish);
+			});
+		});
+};
+
 export {
 	getDishesByCategory,
 	getAllDishes,
 	getDish,
 	postDish,
 	deleteDish,
-	deleteAllDishes
+	deleteAllDishes,
+	postComment,
 };
