@@ -13,7 +13,8 @@ import {
 const initialState = Immutable.Map({
 	isAuthenticated: false,
 	token: null,
-	name: null
+	name: null,
+	admin: false,
 });
 
 export default (state = initialState, action) => {
@@ -24,7 +25,8 @@ export default (state = initialState, action) => {
 			return state.merge({
 				isAuthenticated: true,
 				token: action.token,
-				name: jwtDecode(action.token).sub
+				name: jwtDecode(action.token).sub,
+				admin: jwtDecode(action.token).adm,
 			});
 		}
 		// In case of failure the state goes back to the initial one

@@ -36,6 +36,17 @@ const options = {
 };
 const requireAuthentication = userAuthenticated(options);
 
+const adminAuth = userAuthenticated({
+	authSelector: state => state.get('auth'),
+	predicate: auth => auth.get('admin'),
+	redirectAction: ({pathname, query}) => {
+		if (query.redirect) {
+			return push(`${pathname}?next=${query.redirect}`);
+		}
+	},
+	wrapperDisplayName: 'UserIsJWTAuthenticated'
+});
+
 const routes = (
 <MuiThemeProvider>
 	<Provider store={store}>
@@ -44,7 +55,7 @@ const routes = (
         <Route path="/" component={App} >
           <IndexRoute component={requireAuthentication(Home)} />
 	        <Route path="add" component={AddCategoryContainer} />
-	        <Route path="admin" component={AdminList}/>
+	        <Route path="admin" component={adminAuth(AdminList)}/>
 	        <Route path="/admin/category" component={AdminCategoryContainer}/>
 	        <Route path="/admin/dishes" component={AdminDishContainer}/>
 	        <Route path="addcat" component={AddCategoryContainer}/>
