@@ -1,4 +1,6 @@
 import Dish from '../models/dish';
+import { TOKEN_SECRET } from '../../app.config';
+import jwt from 'jsonwebtoken';
 
 const getDishesByCategory = (req, res) => {
 	const { catId } = req.params;
@@ -42,7 +44,6 @@ const postDish = (req, res) => {
 };
 
 const deleteDish = (req, res) => {
-	console.log(req.params);
     Dish.remove({ _id: req.params.id }, err => {
         if(err) {
             res.send(err);
@@ -58,18 +59,103 @@ const deleteAllDishes = (req, res) => {
 	});
 };
 
-const postComment = (req, res) => {
+const getComments = (req, res) => {
 	const { id } = req.params;
-		Dish.findById(id, function (err, dish) {
-			console.log(dish);
+	Dish.findById(id)
+		.populate('comments.postedBy')
+		.exec((err, dish) => {
 			if (err) throw err;
-			dish.comments.push(req.body);
-			dish.save(function (err, dish) {
-				if (err) throw err;
-				console.log('Updated Comments!');
-				res.json(dish);
+			res.json(dish.comments);
+		});
+};
+
+const postComment = (req, res) => {
+		const { id } = req.params;
+		Dish.findById(id, function (err, dish) {
+			if (err) throw err;
+			const token = req.headers['x-access-token'];
+
+			if(!token) return;
+
+			jwt.verify(token, TOKEN_SECRET, (err, payload) => {
+				const { id } = payload;
+				if(err) throw err;
+
+				req.body.postedBy = id;
+				dish.comments.push(req.body);
+				dish.save((err, dish) => {
+					if (err) throw err;
+						console.log('Updated Comments!');
+						res.json(dish);
+				});
 			});
 		});
+};
+
+const deleteComments = (req, res) => {
+	const { id } = req.params;
+	Dish.findById(id, (err, dish) => {
+		if (err) throw err;
+		for (let i = (dish.comments.length - 1); i >= 0; i--) {
+			dish.comments.id(dish.comments[i]._id).remove();
+		}
+		dish.save(function (err, result) {
+			if (err) throw err;
+			res.send(200, {
+				'Content-Type': 'text/plain'
+			});
+			res.end('Deleted all comments!');
+		});
+	});
+};
+
+const getComment = (req, res) => {
+	const { id, commentId } = req.params;
+	Dish.findById(id)
+		.populate('comments.postedBy')
+		.exec(function (err, dish) {
+			if (err) throw err;
+			res.json(dish.comments.id(commentId));
+		});
+};
+
+const updateComment = (req, res) => {
+	const { id, commentId } = req.params;
+	Dish.findById(id, (err, dish) => {
+		if (err) throw err;
+		dish.comments.id(commentId).remove();
+		req.body.postedBy = req.decoded._doc._id;
+		dish.comments.push(req.body);
+		dish.save(function (err, dish) {
+			if (err) throw err;
+			console.log('Updated Comments!');
+			res.json(dish);
+		});
+	});
+};
+
+const deleteComment = (req, res, next) => {
+	const { id, commentId } = req.params;
+	const token = req.headers['x-access-token'];
+	if(!token) return;
+	jwt.verify(token, TOKEN_SECRET, (err, payload) => {
+		if(err) throw err;
+
+		Dish.findById(id, (err, dish) => {
+			if (dish.comments.id(commentId).postedBy
+				!= payload.id) {
+				var err = new Error('You are not authorized to perform this operation!');
+				err.status = 403;
+				return next(err);
+			}
+			dish.comments.id(commentId).remove();
+			dish.save(function (err, resp) {
+				if (err) throw err;
+				console.log('Comment deleted!');
+				res.json(resp);
+			});
+		});
+	});
 };
 
 export {
@@ -79,5 +165,10 @@ export {
 	postDish,
 	deleteDish,
 	deleteAllDishes,
+	getComments,
 	postComment,
+	deleteComments,
+	getComment,
+	updateComment,
+	deleteComment,
 };

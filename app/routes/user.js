@@ -3,11 +3,12 @@ import moment from 'moment';
 import User from '../models/user';
 import { TOKEN_SECRET } from '../../app.config';
 
-const createToken = (name, admin) => {
+const createToken = (name, admin, id) => {
 	let payload = {
 		sub: name,
 		exp: moment().add(1, 'day').unix(),
-		adm: admin
+		adm: admin,
+		id
 	};
 	return jwt.sign(payload, TOKEN_SECRET);
 };
@@ -20,13 +21,13 @@ const signup = (req, res) => {
 
 		const user = Object.assign(new User(), req.body);
 		user.save((err, result) => {
-			const { name, admin } = result;
+			const { name, admin, _id } = result;
 			if (err) {
 				res.send(err);
 			}
 			res.json({
 				message: `Welcome to Poket Cook Book, you are now logged in ${result.name} ${result.admin}`,
-				token: createToken(name, admin)
+				token: createToken(name, admin, _id)
 			});
 		});
 	});
@@ -34,7 +35,7 @@ const signup = (req, res) => {
 
 const login = (req, res) => {
 	User.findOne({ email: req.body.email }, '+password', (err, user) => {
-		const { name, admin } = user;
+		const { name, admin, _id } = user;
 		if (!user) {
 			return res.status(401).json({ message: 'Invalid email/password' });
 		}
@@ -42,7 +43,7 @@ const login = (req, res) => {
 			if (!isMatch) {
 				return res.status(401).send({ message: 'Invalid email/password' });
 			}
-			res.json({ message: 'You are now logged in', token: createToken(name, admin) });
+			res.json({ message: 'You are now logged in', token: createToken(name, admin, _id) });
 		});
 	});
 };
@@ -50,12 +51,13 @@ const login = (req, res) => {
 const verifyAuth = (req, res, next) => {
 	const token = req.headers['x-access-token'];
 	if (token) {
-		jwt.verify(token, TOKEN_SECRET, function(err, payload) {
+		jwt.verify(token, TOKEN_SECRET, (err, payload) => {
 			if (err) {
 				return res.status(401).send({
 					message: 'Failed to authenticate token.'
 				});
 			} else {
+				req.payload = payload;
 				next();
 			}
 		});
@@ -70,7 +72,6 @@ const verifyAdminAuth = (req, res, next) => {
 	const token = req.headers['x-access-token'];
 	if (token) {
 		jwt.verify(token, TOKEN_SECRET, (err, payload) => {
-			console.log(payload);
 			if(err) {
 				return res.status(401).send({
 					message: 'Failed authenticate Admin'

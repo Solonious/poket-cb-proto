@@ -13,7 +13,12 @@ import {
 	getDish,
 	deleteDish,
 	deleteAllDishes,
+	getComments,
+	deleteComments,
 	postComment,
+	getComment,
+	updateComment,
+	deleteComment,
 } from './app/routes/dishes';
 
 import { signup, login, verifyAuth, getUsers, verifyAdminAuth, deleteAllUsers } from './app/routes/user';
@@ -49,7 +54,10 @@ app.post('/login', login);      // /login for authorization
 app.post('/signup', signup);    // /signup for registration
 
 app.route('/users')
-	.get(verifyAuth, verifyAdminAuth, getUsers)
+	.get(
+		// verifyAuth,
+		// verifyAdminAuth,
+		getUsers)
 	.delete(deleteAllUsers);               // get all users
 
 app.route('/category')
@@ -68,8 +76,19 @@ app.route('/dishes')
 	.post(verifyAuth, verifyAdminAuth, postDish)
 	.delete(verifyAuth, verifyAdminAuth, deleteAllDishes);
 
-app.route('/dishes/:id/comment')
-	.post(verifyAuth, postComment);
+app.route('/dishes/:id/comments')
+	.all(verifyAuth)
+
+	.get(getComments)
+	.post(verifyAuth, postComment)
+	.delete(verifyAuth, deleteComments);
+
+app.route('/dishes/:id/comments/:commentId')
+	.all(verifyAuth)
+
+	.get(getComment)
+	.put(updateComment)
+	.delete(deleteComment);
 // adminka
 app.route('/dishes/:id')
 	.get(verifyAdminAuth, getDish)
