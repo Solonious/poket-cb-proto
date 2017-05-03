@@ -77,15 +77,11 @@ app.route('/dishes')
 	.delete(verifyAuth, verifyAdminAuth, deleteAllDishes);
 
 app.route('/dishes/:id/comments')
-	.all(verifyAuth)
-
 	.get(getComments)
 	.post(verifyAuth, postComment)
 	.delete(verifyAuth, deleteComments);
 
 app.route('/dishes/:id/comments/:commentId')
-	.all(verifyAuth)
-
 	.get(getComment)
 	.put(updateComment)
 	.delete(deleteComment);

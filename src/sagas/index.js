@@ -2,7 +2,7 @@
 import { watchGetCategories, watchDeleteCategory, watchPostCategory } from './categories';
 import { watchGetDishes, watchDeleteDish, watchPostDish } from './dishes';
 import { watchUploadPicture, watchRemovePicture } from './filestack';
-
+import { watchGetComments, watchDeleteComment, watchPostComment } from './comments';
 import { watchLoginUser, watchSignupUser } from './auth';
 
 export default function* rootSaga () {
@@ -18,5 +18,7 @@ export default function* rootSaga () {
 			watchRemovePicture(),
 	    watchLoginUser(),
 	    watchSignupUser(),
+	    watchGetComments(),
+	    watchDeleteComment(),
     ];
 }

@@ -13,22 +13,37 @@ const getDishesByCategory = (req, res) => {
 };
 
 const getAllDishes = (req, res) => {
+	let result;
 	Dish.find({}, (err, dish) => {
 		if(err) {
 			res.send(err);
 		}
-		res.json(dish);
-	});
+		result = dish;
+	})
+		.populate('comments.postedBy')
+		.exec((err, dish) => {
+			if (err) throw err;
+			if(!dish) return;
+			result.comments = dish.comments;
+			res.json(result);
+		});
 };
 
 const getDish = (req, res) => {
+	let result;
 	const { id } = req.params;
 	Dish.findById(id, (err, dish) => {
 		if(err) {
 			res.send(err);
 		}
-		res.json(dish);
-	});
+		result = dish;
+	})
+		.populate('comments.postedBy')
+		.exec((err, dish) => {
+			if (err) throw err;
+			result.comments = dish.comments;
+			res.json(result);
+		});
 };
 
 const postDish = (req, res) => {

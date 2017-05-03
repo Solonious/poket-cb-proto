@@ -6,6 +6,7 @@ import * as categoriesActionCreators from '../actions/categories';
 import * as dishesActionCreators from '../actions/dishes';
 import * as filestackActionCreators from '../actions/filestack';
 import * as authActionCreators from '../actions/auth';
+import * as commentActionCreators from '../actions/comments';
 import Footer from './app/Footer';
 import { Link } from 'react-router';
 
@@ -25,6 +26,7 @@ class App extends React.Component {
     this.deleteDish = this.deleteDish.bind(this);
     this.removePicture = this.removePicture.bind(this);
 	  this.logout = this.logout.bind(this);
+	  this.getComments = this.getComments.bind(this);
   }
   componentDidMount() {
     this.getCategories();
@@ -34,13 +36,16 @@ class App extends React.Component {
     this.props.categoriesActions.getCategories();
   }
   deleteCategory() {
-      this.props.categoriesActions.deleteCategory()
+      this.props.categoriesActions.deleteCategory();
   }
   getDishes() {
     this.props.dishesActions.getDishes();
   }
   deleteDish() {
       this.props.dishesActions.deleteDish();
+  }
+  getComments(id) {
+  	this.props.commentsActions.getComments(id)
   }
   removePicture() {
   	this.props.filestackActions.removePicture();
@@ -70,6 +75,7 @@ function mapStateToProps (state) {
 	return {
 		categories: state.getIn(['categories', 'list'], Immutable.List()).toJS(),
 		dishes: state.getIn(['dishes', 'list'], Immutable.List()).toJS(),
+		comments: state.getIn(['comments', 'list'], Immutable.List()).toJS(),
 		userName: state.getIn(['auth', 'name']),
 	}
 }
@@ -79,6 +85,7 @@ function mapDispatchToProps (dispatch) {
 		categoriesActions: bindActionCreators(categoriesActionCreators, dispatch),
 		dishesActions: bindActionCreators(dishesActionCreators, dispatch),
 		filestackActions: bindActionCreators(filestackActionCreators, dispatch),
+		commentsActions: bindActionCreators(commentActionCreators, dispatch),
 		authActions: bindActionCreators(authActionCreators, dispatch),
 	};
 }

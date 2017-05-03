@@ -5,6 +5,8 @@ import Home from './app/Home';
 import Category from './app/Category';
 import Footer from './app/Footer';
 import SingleDish from './app/SingleDish';
+import AddComment from './app/AddComment';
+import Comments from './app/Comments';
 
 // admin components
 import AdminList from './admin/AdminList'
@@ -24,6 +26,7 @@ export {
 	Category,
 	Footer,
 	SingleDish,
+	AddComment,
 	AdminList,
 	CategoryItemListAdmin,
 	CategoryAddForm,
@@ -33,4 +36,5 @@ export {
 	DishItemListAdmin,
 	LoginForm,
 	Signup,
+	Comments,
 };

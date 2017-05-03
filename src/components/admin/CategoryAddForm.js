@@ -2,7 +2,6 @@ import React from 'react';
 import { Card } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
 import { Field, reduxForm } from 'redux-form/immutable';
 import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 

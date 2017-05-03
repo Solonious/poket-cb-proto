@@ -68,6 +68,7 @@ const postServerCategory = (category) => {
 function* getCategories () {
     try {
         const categories = yield call(fetchCategories);
+        console.log('categories', categories);
         yield put(getCategoriesSuccess(categories));
     } catch (err) {
         yield put(getCategoriesFailure());

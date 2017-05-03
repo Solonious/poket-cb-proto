@@ -72,7 +72,10 @@ const styles = {
 		fontSize: '1.2rem',
 		color: 'red',
 		cursor: 'pointer',
-		alignItems: 'flex-end'
+		alignItems: 'flex-end',
+	},
+	editBtn: {
+		minWidth: '36px',
 	},
 	uploadedPicture: {
 		display: 'none',

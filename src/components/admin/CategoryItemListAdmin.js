@@ -24,7 +24,7 @@ class CategoryItemListAdmin extends React.PureComponent {
 						style={styles.deleteBtn}
 						onClick={() => {
 							deleteCategory(_id)
-                        }}
+						}}
 					>
 						&times;
 					</button>
