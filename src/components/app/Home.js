@@ -2,13 +2,15 @@ import React from 'react';
 import { GridList } from 'material-ui/GridList';
 import { Link } from 'react-router';
 
+import CircularProgress from './CircularProgress';
+
 import 'react-redux-toastr/src/styles/index.scss';
 import styles from '../styles';
 
 class Home extends React.PureComponent {
 	render() {
 		const { categories } = this.props;
-		return (
+		return categories.length ? (
 			<div style={styles.rootCategory}>
 				<GridList
 					cellHeight={'auto'}
@@ -27,7 +29,7 @@ class Home extends React.PureComponent {
 					))}
 				</GridList>
 			</div>
-		);
+		) : <CircularProgress/>;
 	}
 }
 

@@ -1,3 +1,5 @@
+import { grey400 } from 'material-ui/styles/colors';
+
 const styles = {
 	app: {
 		textAlign: 'center'
@@ -93,6 +95,36 @@ const styles = {
 		fontFamily: 'Glamour, sans-serif',
 		display: 'block',
 		textAlign: 'center'
+	},
+	name: {
+		display: 'block',
+		fontWeight: 'bold'
+	},
+	list: {
+		width: '80%',
+		margin: '0 auto',
+		listStyle: 'none',
+		padding: 0,
+		position: 'relative',
+	},
+	listItem: {
+		textAlign: 'left',
+		position: 'relative'
+	},
+	date: {
+		fontSize: '0.6rem',
+		color: grey400
+	},
+	text: {
+		fontSize: '0.7rem',
+		textAlign: 'justify',
+		lineHeight: '3px'
+	},
+	editBtnContainer: {
+		position: 'absolute',
+		top: 5,
+		right: 5,
+		opacity: 0,
 	}
 };
 

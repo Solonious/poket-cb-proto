@@ -8,14 +8,12 @@ import {
 	App,
 	LoginForm,
 	Signup,
-	Comments
 } from './components';
 import {
 	AddCategoryContainer,
 	AddDishContainer,
 	AdminCategoryContainer,
 	AdminDishContainer,
-	AddCommentContainer
 } from './containers';
 import { Provider } from 'react-redux';
 import configureStore from './store';
@@ -77,7 +75,6 @@ const routes = (
           <Route path="adddish" component={AddDishContainer}/>
           <Route path="/:catId/dishes" component={Category}/>
           <Route path="/:catId/:dishId" component={SingleDish}/>
-	        <Route path="/dishes/:dishId/comments" component={AddCommentContainer}/>
 	        <Route path="login" component={LoginForm}/>
 	        <Route path="signup" component={Signup}/>
           <Route path="*" component={App}/>

@@ -3,6 +3,10 @@ import {
 	GET_DISHES,
 	GET_DISHES_SUCCESS,
 	GET_DISHES_FAILURE,
+	//get dish
+	GET_DISH,
+	GET_DISH_SUCCESS,
+	GET_DISH_FAILURE,
 	//delete dishes
     DELETE_DISH,
     DELETE_DISH_SUCCESS,
@@ -30,6 +34,26 @@ function getDishesFailure () {
 	return {
 		type: GET_DISHES_FAILURE
 	};
+}
+
+function getDish (id) {
+	return {
+		type: GET_DISH,
+		id
+	};
+}
+
+function getDishSuccess (dish) {
+	return {
+		type: GET_DISH_SUCCESS,
+		dish
+	}
+}
+
+function getDishFailure () {
+	return {
+		type: GET_DISH_FAILURE
+	}
 }
 
 function deleteDish (id) {
@@ -74,6 +98,9 @@ export {
 	getDishes,
 	getDishesSuccess,
 	getDishesFailure,
+	getDish,
+	getDishSuccess,
+	getDishFailure,
 	deleteDish,
 	deleteDishSuccess,
 	deleteDishFailure,

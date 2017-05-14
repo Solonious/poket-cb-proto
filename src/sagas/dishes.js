@@ -3,10 +3,12 @@ import { takeLatest } from 'redux-saga/effects';
 import { put, call, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import {actions as toastrActions} from 'react-redux-toastr';
-import { GET_DISHES, DELETE_DISH, POST_DISH } from '../constants/dishes';
+import { GET_DISHES, GET_DISH, DELETE_DISH, POST_DISH } from '../constants/dishes';
 import {
 	getDishesSuccess,
 	getDishesFailure,
+	getDishSuccess,
+	getDishFailure,
 	deleteDishSuccess,
 	deleteDishFailure,
 	postDishSuccess,
@@ -30,6 +32,20 @@ const fetchDishes = () => {
 		})
 	})
 		.then(response => response.json())
+};
+
+const fetchDish = (id) => {
+	return fetch(`http://localhost:8080/dishes/${id}`, {
+		headers: new Headers({
+			'Content-Type': 'application/json'
+		})
+	})
+		.then(response => {
+			if (response.status === 200) {
+				return response.json();
+			}
+			throw response.json();
+		});
 };
 
 const deleteServerDish = (id) => {
@@ -71,6 +87,16 @@ function* getDishes () {
 		yield put(getDishesSuccess(dishes));
 	} catch (err) {
 		yield put(getDishesFailure());
+	}
+}
+
+function* getDish (action) {
+	const { id } = action;
+	try {
+		const dish = yield call(fetchDish, id);
+		yield put(getDishSuccess(dish));
+	} catch (err) {
+		yield put(getDishFailure());
 	}
 }
 
@@ -141,6 +167,10 @@ function* watchGetDishes () {
 	yield takeLatest(GET_DISHES, getDishes);
 }
 
+function* watchGetDish () {
+	yield takeLatest(GET_DISH, getDish);
+}
+
 function* watchDeleteDish () {
     yield takeLatest(DELETE_DISH, deleteDish);
 }
@@ -151,6 +181,7 @@ function* watchPostDish () {
 
 export {
 	watchGetDishes,
+	watchGetDish,
 	watchDeleteDish,
 	watchPostDish,
 };

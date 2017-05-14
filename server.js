@@ -87,7 +87,7 @@ app.route('/dishes/:id/comments/:commentId')
 	.delete(deleteComment);
 // adminka
 app.route('/dishes/:id')
-	.get(verifyAdminAuth, getDish)
+	.get(getDish)
 	.delete(verifyAdminAuth, deleteDish);
 
 app.route('/:catId/dishes/:id')

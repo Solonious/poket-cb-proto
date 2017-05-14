@@ -3,6 +3,8 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
+import CircularProgress from './CircularProgress';
+
 import { Link } from 'react-router';
 
 import styles from '../styles';
@@ -14,7 +16,7 @@ class Category extends React.PureComponent {
   	const currentCategoryDishes = dishes.filter((dish)=>{
   		return dish.category === catId;
 	  });
-		return (
+		return dishes.length ? (
       <div style={styles.rootCategory}>
         <GridList
           cellHeight={180}
@@ -36,7 +38,7 @@ class Category extends React.PureComponent {
             ))}
         </GridList>
       </div>
-        );
+        ) : <CircularProgress/>;
 	};
 }
 

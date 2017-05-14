@@ -23,7 +23,7 @@ const getAllDishes = (req, res) => {
 		.populate('comments.postedBy')
 		.exec((err, dish) => {
 			if (err) throw err;
-			if(!dish) return;
+			if(!dish || !result) return;
 			result.comments = dish.comments;
 			res.json(result);
 		});

@@ -1,8 +1,8 @@
 // Import the watcher we have just created
 import { watchGetCategories, watchDeleteCategory, watchPostCategory } from './categories';
-import { watchGetDishes, watchDeleteDish, watchPostDish } from './dishes';
+import { watchGetDishes, watchGetDish, watchDeleteDish, watchPostDish } from './dishes';
 import { watchUploadPicture, watchRemovePicture } from './filestack';
-import { watchGetComments, watchDeleteComment, watchPostComment } from './comments';
+import { watchGetComments, watchDeleteComment } from './comments';
 import { watchLoginUser, watchSignupUser } from './auth';
 
 export default function* rootSaga () {
@@ -12,6 +12,7 @@ export default function* rootSaga () {
 	    watchDeleteCategory(),
 	    watchPostCategory(),
 	    watchGetDishes(),
+	    watchGetDish(),
 	    watchDeleteDish(),
 	    watchPostDish(),
 	    watchUploadPicture(),
